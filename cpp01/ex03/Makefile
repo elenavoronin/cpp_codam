@@ -6,16 +6,16 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/06/24 13:04:30 by elenavoroni   ########   odam.nl          #
+#    Updated: 2024/06/24 20:11:56 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = weapon
-SRCS = main.cpp Weapon.hpp Weapon.cpp HumanA.hpp HumanB.hpp HumanA.cpp HumanB.cpp
+SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = Weapon.hpp HumanA.hpp HumanB.hpp
 CC = c++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -fsanitize=address
 
 all: $(NAME)
 

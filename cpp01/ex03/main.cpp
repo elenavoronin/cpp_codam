@@ -1,14 +1,26 @@
-#include "Zombie.hpp"
+#include "Weapon.hpp"
+#include "HumanA.hpp"
+#include "HumanB.hpp"
 #include <iostream>
 #include <string>
 
 
-int    main(void)
+int main()
 {
-	
-	Zombie* horde = zombieHorde(10, "franky");
-	for(int i = 0; i < 10; i++) {
-		horde[i].announce();
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanA bob("Bob", club);
+		bob.attack();
+		club.setType("some other type of club");
+		bob.attack();
 	}
-    delete[] horde;
+	{
+		Weapon club = Weapon("crude spiked club");
+		HumanB jim("Jim");
+		jim.setWeapon(club);
+		jim.attack();
+		club.setType("some other type of club");
+		jim.attack();
+	}
+	return 0;
 }

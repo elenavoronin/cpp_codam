@@ -1,7 +1,7 @@
-#include "weapon.hpp"
+#include "Weapon.hpp"
 #include <iostream>
 
-Weapon::Weapon() {
+Weapon::Weapon(const std::string& type) : type(type) {
 	std::cout <<"Weapon constructor called" << std::endl;
 }
 
