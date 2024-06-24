@@ -1,7 +1,7 @@
 #include "Zombie.hpp"
 #include <iostream>
 
-Zombie::Zombie(/* args */) {
+Zombie::Zombie() {
     std::cout << "Zombie constructor called" << std::endl;
 }
 
