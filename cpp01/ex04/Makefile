@@ -6,14 +6,13 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/06/24 20:23:22 by elenavoroni   ########   odam.nl          #
+#    Updated: 2024/06/27 11:41:37 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = weapon
-SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+NAME = replace
+SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = Weapon.hpp HumanA.hpp HumanB.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
@@ -31,6 +30,7 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
+	@rm -f *.replace
 
 re: fclean all
 

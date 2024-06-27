@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/06/13 13:39:44 by elenavoroni   ########   odam.nl          #
+#    Updated: 2024/06/24 20:23:28 by elenavoroni   ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp zombieHorde.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = Zombie.hpp
 CC = c++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
