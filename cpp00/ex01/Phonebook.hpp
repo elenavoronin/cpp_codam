@@ -11,7 +11,7 @@ class Phonebook{
     public:
         Phonebook();
         ~Phonebook();
-        void    add(std::string info);
+        void    add(std::string info, int i);
         void    search(std::string info);
         void    exit();
 

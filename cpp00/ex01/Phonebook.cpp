@@ -13,10 +13,12 @@ Phonebook::~Phonebook() {
     std::cout << "Phonebook destructor called" << std::endl;
 }
 
-void Phonebook::add(std::string info) {
+void Phonebook::add(std::string info, int i) {
     Phonebook   phonebook;
     Contact     contact;
 
-    
+    phonebook.contacts[i] = 
+
+        
 
 }

@@ -15,13 +15,8 @@ private:
 public:
     Contact();
     ~Contact();
-    void    getInfo(std::string info);
-    void    set_first(std::string info);
-    void    set_last(std::string info);
-    void    set_nickname(std::string info);
-    void    set_phone(std::string info);
-    void    set_secret(std::string info);
-
+    void    get_contact();
+    void    set_contact();
 };
 
 #endif

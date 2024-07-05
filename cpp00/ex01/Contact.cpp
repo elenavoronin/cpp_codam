@@ -11,27 +11,21 @@ Contact::~Contact() {
     std::cout << "Contact destructor called" << std::endl;
 }
 
-void    Contact::set_first(std::string info) {
+void    Contact::set_contact() {
     Contact contact;
-    contact.first_name = info;
-}
+    
+    std::cout << "Enter first name" << std::endl;
+    std::getline(std::cin, contact.first_name);
 
-void    Contact::set_last(std::string info) {
-    Contact contact;
-    contact.last_name = info;
-}
+    std::cout << "Enter last name" << std::endl;
+    std::getline(std::cin, contact.last_name);
 
-void    Contact::set_nickname(std::string info) {
-    Contact contact;
-    contact.nickname = info;
-}
+    std::cout << "Enter nickname" << std::endl;
+    std::getline(std::cin, contact.nickname);
 
-void    Contact::set_phone(std::string info) {
-    Contact contact;
-    contact.phone_number = info;
-}
+    std::cout << "Enter phone number" << std::endl;
+    std::getline(std::cin, contact.phone_number);
 
-void    Contact::set_secret(std::string info) {
-    Contact contact;
-    contact.darkest_secret = info;
+    std::cout << "Enter darkest secret" << std::endl;
+    std::getline(std::cin, contact.darkest_secret);
 }
