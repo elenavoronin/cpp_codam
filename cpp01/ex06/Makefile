@@ -6,13 +6,14 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/07/05 13:31:05 by evoronin      ########   odam.nl          #
+#    Updated: 2024/07/05 13:47:35 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = replace
-SRCS = main.cpp
+NAME = harlFilter
+SRCS = main.cpp Harl.cpp
 OBJS = $(SRCS:.cpp=.o)
+INCLUDE = Harl.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror #-fsanitize=address
 
@@ -30,7 +31,6 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@rm -f *.replace
 
 re: fclean all
 
