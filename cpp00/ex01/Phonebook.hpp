@@ -1,10 +1,20 @@
 #ifndef PHONEBOOK_HPP
 # define PHONEBOOK_HPP
 
-class Phonebook
-{
-    Phonebook();
-    ~Phonebook();
+#include "Contact.hpp"
+#include <string>
+
+class Phonebook{
+    private:
+        Contact contacts[8];
+
+    public:
+        Phonebook();
+        ~Phonebook();
+        void    add(std::string info);
+        void    search(std::string info);
+        void    exit();
+
 };
 
 #endif

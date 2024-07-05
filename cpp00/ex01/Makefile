@@ -3,22 +3,28 @@
 #                                                         ::::::::             #
 #    Makefile                                           :+:    :+:             #
 #                                                      +:+                     #
-#    By: evoronin <evoronin@student.codam.nl>         +#+                      #
+#    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/05/31 12:14:45 by evoronin      ########   odam.nl          #
+#    Updated: 2024/07/05 17:25:34 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = megaphone
-SRCS =	megaphone.cpp
+NAME = brainz
+SRCS = main.cpp Phonebook.cpp Contact.cpp
+OBJS = $(SRCS:.cpp=.o)
+INCLUDE = Phonebook.hpp Contact.hpp
 CC = c++
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror 
 
 all: $(NAME)
 
-$(NAME): $(SRCS)
-	@$(CC) $(FLAGS) $(SRCS) -o $(NAME)
+%.o: %.cpp $(INCLUDE)
+	@echo "Compiling $<"
+	@$(CC) $(FLAGS) -c $< -o $@
+
+$(NAME): $(OBJS)
+	@$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
