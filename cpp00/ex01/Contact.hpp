@@ -1,6 +1,4 @@
-#ifndef CONTACT_HPP
-#define CONTACT_HPP
-
+#pragma once
 
 #include <string>
 
@@ -15,8 +13,13 @@ private:
 public:
     Contact();
     ~Contact();
-    void    get_contact();
-    void    set_contact();
-};
 
-#endif
+    void            setContact();
+    std::string     getFirstName() const;
+    std::string     getLastName() const;
+    std::string     getNickname() const;
+    std::string     getPhoneNumber() const;
+    std::string     getDarkestSecret() const;
+    void            display() const;
+
+};

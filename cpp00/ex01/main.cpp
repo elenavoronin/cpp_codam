@@ -4,29 +4,28 @@
 #include <string>
 
 
-int main(int argc, char **argv) {
+int main() {
     while (1)
     {
-        if (argc == 1) {
-            std::cout << "You can ADD, SEARCH or EXIT" << std::endl;
+        std::cout << "ADD, SEARCH or EXIT" << std::endl;
+        Phonebook phonebook;
+        std::string command;
+        phonebook.setlast(0);
+        phonebook.setindex(0);
+        std::getline(std::cin, command);
+        if (command == "ADD") {
+            phonebook.add();
+            phonebook.setlast(phonebook.getlast() + 1);
         }
-        else if (argc == 2) {
-            Phonebook phonebook;
-            std::string command = argv[1];
-            if (command == "ADD") {
-                phonebook.add(argv[1]);
-            }
-            else if (command == "SEARCH") {
-                phonebook.search(argv[1]);
-            }
-            else if (command == "EXIT") {
-                return 0;
-            }
-            else
-                std::cout << "Wrong command, try ADD, SEARCH or EXIT" << std::endl;
+        else if (command == "SEARCH") {
+            phonebook.search();
         }
-        else
-            std::cout << "Wrong number of arguments" << std::endl;
+        else if (command == "EXIT") {
+            break ;
+            }
+        else {
+            std::cout << "Wrong command" << std::endl;
+        }
     }
     return 0;
 }

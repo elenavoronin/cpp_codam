@@ -6,11 +6,11 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/07/05 17:25:34 by evoronin      ########   odam.nl          #
+#    Updated: 2024/07/08 13:34:57 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = brainz
+NAME = phonebook
 SRCS = main.cpp Phonebook.cpp Contact.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = Phonebook.hpp Contact.hpp
