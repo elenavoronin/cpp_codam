@@ -11,22 +11,22 @@ Phonebook::~Phonebook() {
     // std::cout << "Phonebook destructor called" << std::endl;
 }
 
-void Phonebook::add() {
-    Phonebook   phonebook;
-    Contact     contact;
-    int         i = phonebook.last;
+void Phonebook::add(Contact& contact) {
+    int         i = this->getcount();
 
-    if (phonebook.last == 8) {
-        i = 1;
-        phonebook.index = 0;
+    if (this->count == 8) {
+        i = 0;
     }
-    else if (!phonebook.last) {
-        i = 1;
-        phonebook.index = 0;
-    }
-    phonebook.contacts[i].setContact();
-    phonebook.index = phonebook.index + 1;
-    phonebook.last = phonebook.last + 1;
+    if (contact.getDarkestSecret().empty() ||
+        contact.getNickname().empty() ||
+        contact.getPhoneNumber().empty() ||
+        contact.getFirstName().empty() ||
+        contact.getLastName().empty()) {
+            std::cout << "Contact not added, fields can't be empty" << std::endl;
+            return ;
+        }
+    this->contacts[i] = contact;
+    this->setcount(this->getcount() + 1);
     std::cout << "Contact added" << std::endl;
 }
 
@@ -39,28 +39,20 @@ void    Phonebook::search() const {
         std::cin.ignore();
         return ;
     }
-    if (this->getlast() == 0) {
+    if (this->getcount() == 0) {
+        std::cout << "count: " << this->count;
         std::cout << "Phonebook is empty" << std::endl;
         std::cin.ignore();
         return ;
     }
-    this->contacts[index].display();
+    this->contacts[index].display(index);
     std::cin.ignore();
 }
 
-void    Phonebook::setlast(int last) {
-    Phonebook::last = last;
+void    Phonebook::setcount(int last) {
+    Phonebook::count = last;
 }
 
-int    Phonebook::getlast() const {
-    return this->last;
+int    Phonebook::getcount() const {
+    return this->count;
 }
-
-void    Phonebook::setindex(int index) {
-    Phonebook::index = index;
-}
-
-int    Phonebook::getindex() const {
-    return this->index;
-}
-

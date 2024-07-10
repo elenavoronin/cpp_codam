@@ -20,6 +20,6 @@ public:
     std::string     getNickname() const;
     std::string     getPhoneNumber() const;
     std::string     getDarkestSecret() const;
-    void            display() const;
+    void            display(int index) const;
 
 };

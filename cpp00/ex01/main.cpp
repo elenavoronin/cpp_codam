@@ -5,17 +5,17 @@
 
 
 int main() {
+    Phonebook phonebook;
     while (1)
     {
         std::cout << "ADD, SEARCH or EXIT" << std::endl;
-        Phonebook phonebook;
         std::string command;
-        phonebook.setlast(0);
-        phonebook.setindex(0);
+        phonebook.setcount(0);
         std::getline(std::cin, command);
         if (command == "ADD") {
-            phonebook.add();
-            phonebook.setlast(phonebook.getlast() + 1);
+            Contact contact;
+            contact.setContact();
+            phonebook.add(contact);
         }
         else if (command == "SEARCH") {
             phonebook.search();

@@ -6,16 +6,13 @@
 class Phonebook{
     private:
         Contact contacts[8];
-        int     index;
-        int     last;
+        int     count;
 
     public:
         Phonebook();
         ~Phonebook();
-        void    add();
+        void    add(Contact& contact);
         void    search() const;
-        void    setindex(int index);
-        int     getindex() const;
-        void    setlast(int last);
-        int     getlast() const;
+        void    setcount(int last);
+        int     getcount() const;
 };
