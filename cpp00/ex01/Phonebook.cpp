@@ -14,6 +14,12 @@ Phonebook::~Phonebook() {
 void Phonebook::add(Contact& contact) {
     int         i = this->getcount() + 1;
 
+	if (i == 1)
+		this->setlast(1);
+	if (i == 9) {
+		i = this->getlast();
+		this->setlast(i + 1);
+	}
     if (contact.getDarkestSecret().empty() ||
         contact.getNickname().empty() ||
         contact.getPhoneNumber().empty() ||
@@ -50,5 +56,13 @@ void    Phonebook::setcount(int last) {
 }
 
 int    Phonebook::getcount() const {
+    return this->count;
+}
+
+void   Phonebook::setlast(int last) {
+    Phonebook::oldest = last;
+}
+
+int    Phonebook::getlast() const {
     return this->count;
 }

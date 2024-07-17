@@ -21,6 +21,5 @@ public:
     std::string     getPhoneNumber() const;
     std::string     getDarkestSecret() const;
     void            display(int index) const;
-	std::string		truncate(std::string str);
 
 };
