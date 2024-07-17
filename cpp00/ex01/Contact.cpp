@@ -55,12 +55,28 @@ std::string   Contact::getDarkestSecret() const {
     return this->darkest_secret;
 }
 
+std::string	Contact::truncate(std::string str) {
+	std::string string;
+	string = str.substr(0, 10 - 1) + ".";
+	return string;
+
+}
+
 void    Contact::display(int index) const {
+	if (this->first_name.length() > 10) {
+		truncate(this->first_name);
+	}
+	if (this->last_name.length() > 10 ){
+		this->last_name.substr(0, 10 - 1) + ".";
+	}
+	if (this->nickname.length() > 10) {
+		this->nickname.substr(0, 10 - 1) + ".";
+	}
     std::cout << std::setw(10) << "index" << "|" 
             << std::setw(10) << "first name" <<  "|" 
             << std::setw(10) << "last name" << "|" 
             << std::setw (10) << "nickname" << std::endl;
-    std::cout << index 
+    std::cout << std::setw(10) << index << "|"
             << std::setw(10) << this->first_name << "|" 
             << std::setw(10) << this->last_name << "|" 
             << std::setw(10) << this->nickname << std::endl;

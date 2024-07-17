@@ -12,11 +12,8 @@ Phonebook::~Phonebook() {
 }
 
 void Phonebook::add(Contact& contact) {
-    int         i = this->getcount();
+    int         i = this->getcount() + 1;
 
-    if (this->count == 8) {
-        i = 0;
-    }
     if (contact.getDarkestSecret().empty() ||
         contact.getNickname().empty() ||
         contact.getPhoneNumber().empty() ||
@@ -26,7 +23,7 @@ void Phonebook::add(Contact& contact) {
             return ;
         }
     this->contacts[i] = contact;
-    this->setcount(this->getcount() + 1);
+	this->count++;
     std::cout << "Contact added" << std::endl;
 }
 
@@ -40,7 +37,6 @@ void    Phonebook::search() const {
         return ;
     }
     if (this->getcount() == 0) {
-        std::cout << "count: " << this->count;
         std::cout << "Phonebook is empty" << std::endl;
         std::cin.ignore();
         return ;
