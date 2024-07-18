@@ -72,7 +72,7 @@ void    Contact::display(int index) const {
             << std::setw(10) << "first name" <<  "|" 
             << std::setw(10) << "last name" << "|" 
             << std::setw (10) << "nickname" << std::endl;
-    std::cout << std::setw(10) << index << "|"
+    std::cout << std::setw(10) << index + 1 << "|"
             << std::setw(10) << truncate(this->first_name) << "|" 
             << std::setw(10) << truncate(this->last_name) << "|" 
             << std::setw(10) << truncate(this->nickname) << std::endl;

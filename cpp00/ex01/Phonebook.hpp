@@ -16,6 +16,6 @@ class Phonebook{
         void    search() const;
         void    setcount(int last);
         int     getcount() const;
-		void	setlast(int last);
-		int		getlast() const;
+		void	setoldest(int last);
+		int		getoldest() const;
 };
