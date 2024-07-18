@@ -2,6 +2,7 @@
 #include <string>
 #include <iostream>
 #include <iomanip>
+#include <stdio.h>
 
 
 Contact::Contact() {
@@ -67,13 +68,18 @@ std::string	truncate(std::string str) {
 
 }
 
-void    Contact::display(int index) const {
-    std::cout << std::setw(10) << "index" << "|" 
-            << std::setw(10) << "first name" <<  "|" 
-            << std::setw(10) << "last name" << "|" 
-            << std::setw (10) << "nickname" << std::endl;
+void    Contact::print(int index) const {
     std::cout << std::setw(10) << index + 1 << "|"
             << std::setw(10) << truncate(this->first_name) << "|" 
             << std::setw(10) << truncate(this->last_name) << "|" 
             << std::setw(10) << truncate(this->nickname) << std::endl;
+}
+
+
+void    Contact::display() const {
+        std::cout << "First name: " << this->getFirstName() << std::endl;
+        std::cout << "Last name: " << this->getLastName() << std::endl;
+        std::cout << "Nickname: " << this->getNickname() << std::endl;
+        std::cout << "Phone number: " << this->getPhoneNumber() << std::endl;
+        std::cout << "Darkest secret: " << this->getDarkestSecret() << std::endl;
 }

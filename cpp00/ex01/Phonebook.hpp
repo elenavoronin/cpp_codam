@@ -18,4 +18,5 @@ class Phonebook{
         int     getcount() const;
 		void	setoldest(int last);
 		int		getoldest() const;
+        void    printcontacts() const;
 };
