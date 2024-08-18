@@ -1,0 +1,34 @@
+#include "DiamondTrap.hpp"
+#include <iostream>
+#include <string>
+
+DiamondTrap::DiamondTrap(std::string name) :  ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
+    std::cout << "DiamondTrap constructor called" << std::endl;
+    Name = name;
+    HitPoints = FragTrap::getHitPoints();
+    EnergyPoints = ScavTrap::getEnergyPoints();
+    AttackDamage = FragTrap::getAttackDamage();
+}
+
+DiamondTrap::DiamondTrap(const DiamondTrap& copy) : ClapTrap(copy), ScavTrap(copy), FragTrap(copy) {
+    std::cout << "DiamondTrap copy constructor called" << std::endl;
+    *this = copy;
+}
+
+DiamondTrap& DiamondTrap::operator=(const DiamondTrap& copy) {
+    std::cout << "DiamondTrap assignment operator called" << std::endl;
+    if (this != &copy)
+    {
+        ClapTrap::operator=(copy);
+        Name = copy.Name;
+    }
+    return *this;
+}
+
+DiamondTrap::~DiamondTrap() {
+    std::cout << "DiamondTrap destructor called" << std::endl;
+}
+
+void DiamondTrap::whoAmI() {
+    std::cout << "DiamondTrap name: " << Name << ", ClapTrap name: " << ClapTrap::Name << std::endl;
+}

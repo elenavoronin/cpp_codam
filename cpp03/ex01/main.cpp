@@ -17,7 +17,9 @@ int main( void ) {
    scav.takeDamage(3);
    scav.beRepaired(1);
 
-    std::cout << scav.getHitPoints() << std::endl; 
-    std::cout << scav.getEnergyPoints() << std::endl; 
+   scav.guardGate();
+
+    // std::cout << scav.getHitPoints() << std::endl; 
+    // std::cout << scav.getEnergyPoints() << std::endl; 
 
 }
