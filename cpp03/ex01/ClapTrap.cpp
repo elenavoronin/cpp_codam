@@ -3,7 +3,7 @@
 #include <iostream>
 
 ClapTrap::ClapTrap(std::string Name) {
-    std::cout << "Constructor called" << std::endl;
+    std::cout << "ClapTrap constructor called" << std::endl;
     this->Name = Name;
     this->HitPoints = 10;
     this->EnergyPoints = 10;
@@ -11,11 +11,12 @@ ClapTrap::ClapTrap(std::string Name) {
 }
 
 ClapTrap::ClapTrap(const ClapTrap& copy) {
-    std::cout << "Copy constructor called" << std::endl;
+    std::cout << "ClapTrap copy constructor called" << std::endl;
     *this = copy;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
+    std::cout << "ClapTrap assignment operator called" << std::endl;
     if (this != &copy)
     {
         this->Name = copy.Name;
@@ -27,7 +28,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
 }
 
 ClapTrap::~ClapTrap() {
-    std::cout << "Destructor called" << std::endl;
+    std::cout << "CalpTrap destructor called" << std::endl;
 }
 
 
