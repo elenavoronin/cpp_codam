@@ -4,16 +4,32 @@
 #include <ctime>
 #include <iomanip>
 
+int	Account::_nbAccounts = 0;
+int	Account::_totalAmount = 0;
+int	Account::_totalNbDeposits = 0;
+int	Account::_totalNbWithdrawals = 0;
 
-Account::Account(int initial_depost) {
-	this->_accountIndex = 0;
-	this->_amount = initial_depost;
-	this->_nbDeposits = 0;
-	this->_nbWithdrawals = 0;
+
+Account::Account(int initial_deposit) {
+	// std::cout << "Constructor called" << std::endl;
+	_accountIndex = _nbAccounts++;
+	_totalAmount += initial_deposit;
+	_amount = initial_deposit;
+	_displayTimestamp();
+	std::cout <<"index:" << _accountIndex << ";"
+	<<  "amount:" << _amount << ";"
+	<< "created"
+	<< std::endl;
 }
 
 Account::~Account(void) {
-
+	_displayTimestamp();
+	std::cout <<"index:" << _accountIndex << ";"
+	<<  "amount:" << _amount << ";"
+	<< "closed"
+	<< std::endl;
+	_totalAmount -= _amount;
+	// std::cout << "Destructor called" << std::endl;
 }
 
 int	Account::getNbAccounts(void) {
@@ -33,24 +49,63 @@ int	Account::getNbWithdrawals(void) {
 }
 
 void	Account::displayAccountsInfos(void) {
-	std::cout << _displayTimestamp << "index:" << 
-		_accountIndex << std::endl;
+	_displayTimestamp();
+	std::cout <<"accounts:" << getNbAccounts() << ";"
+	<<  "total:" << getTotalAmount() << ";"
+	<< "deposits:" << getNbDeposits() << ";"
+	<< "withdrawals:" << getNbWithdrawals() << ";"
+	<< std::endl;
 }
 
 void	Account::makeDeposit(int deposit) {
-	
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";"
+	<< "p_amount:" << _amount << ";"
+	<< "deposit:" << deposit << ";"
+	<< "amount:" << _amount + deposit << ";"
+	<< "nb_deposits:" << _nbDeposits + 1
+	<< std::endl;
+	_amount += deposit;
+	_nbDeposits += 1;
 }
 
 bool	Account::makeWithdrawal(int withdrawal) {
+	_displayTimestamp();
+	if(withdrawal <= 0)
+		return false;
+	if (withdrawal <= _amount)
+	{
+		std::cout << "index:" << _accountIndex << ";"
+		<< "p_amount:" << _amount << ";"
+		<< "withdrawal:" << withdrawal << ";"
+		<< "amount:" << _amount - withdrawal << ";"
+		<< "nb_withdrawals:" << _nbWithdrawals + 1
+		<< std::endl;
+		_amount -= withdrawal;
+		_nbWithdrawals += 1;
+		return true;
+	}
+	else
+	{
+		std::cout << "index:" << _accountIndex << ";"
+		<< "p_amount:" << _amount << ";"
+		<< "withdrawal:refused" << std::endl;
+		return true;
+	}
 
 }
 
 int		Account::checkAmount(void) const {
-
+	return _amount;
 }
 
 void	Account::displayStatus(void) const {
-
+	_displayTimestamp();
+	std::cout << "index:" << _accountIndex << ";"
+	<< "amount:" << _amount << ";"
+	<< "deposits:" << _nbDeposits << ";"
+	<< "withdrawals:" << _nbWithdrawals << ";"
+	<< std::endl;
 }
 
 void	Account::_displayTimestamp(void) {

@@ -80,6 +80,7 @@
 		"span": "cpp",
 		"iomanip": "cpp",
 		"codecvt": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"cinttypes": "cpp"
 	}
 }
