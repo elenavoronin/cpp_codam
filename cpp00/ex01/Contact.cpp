@@ -36,7 +36,7 @@ void    Contact::setContact() {
     std::getline(std::cin, input);
     this->darkest_secret = input;
 
-    std::cin.ignore();
+    // std::cin.ignore();
 }
 
 

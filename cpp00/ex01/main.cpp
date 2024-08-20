@@ -24,10 +24,12 @@ int main() {
         }
         else if (command == "EXIT") {
             break ;
-            }
+        }
+        else if (std::cin.eof()) {
+            break ;
+        }
         else {
             std::cout << "Wrong command" << std::endl;
-            break ;
         }
     }
     return 0;

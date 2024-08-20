@@ -22,34 +22,59 @@ Phonebook::~Phonebook() {
             std::cout << "Contact not added, fields can't be empty" << std::endl;
             return ;
         }
-        int i = (this->getcount()) % 8;
+        int i = (this->getoldest()) % 8;
         this->contacts[i] = contact;
-        if (this->count < 8) {
+        if (this->count < 8)
             this->count++;
-        } else {
-            this->oldest = (this->oldest + 1) % 8;
-     }
+        this->oldest++;
+        if (this->oldest  == 8) {
+            this->oldest = 0;
+        }
         std::cout << "Contact added" << std::endl;
     }
 
+bool isNumber(const std::string& str) {
+    for (char c : str) {
+        if (!std::isdigit(c)) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void    Phonebook::search() const {
-    int index;
+    std::string index;
+    int ind;
     
     if (this->getcount() == 0) {
         std::cout << "Phonebook is empty" << std::endl;
-        std::cin.ignore();
+        // std::cin.ignore();
         return ;
     }
     this->printcontacts();
     std::cout << "Enter contact index" << std::endl;
-    std::cin >> index;
-    if (index < 1 || index > (this->getcount())) {
-        std::cout << "Wrong index" << std::endl;
-        std::cin.ignore();
+    std::getline(std::cin, index);
+    if (isNumber(index) == false) {
+        std::cout << "Wrong index, please enter a number" << std::endl;
+        // std::cin.ignore();
         return ;
     }
-    this->contacts[index - 1].display();
-    std::cin.ignore();
+    else {
+        try {
+            ind = std::stoi(index);
+        }
+        catch (const std::out_of_range& e) {
+             std::cout << "Invalid input: Not a number" << std::endl;
+            return ;
+        }
+    }
+    if (ind < 1 || ind > (this->getcount())) {
+        std::cout << "Wrong index, enter a positive integer" << std::endl;
+        // std::cin.ignore();
+        return ;
+    }
+    this->contacts[ind - 1].display();
+    // std::cin.ignore();
 }
 
 void    Phonebook::setcount(int last) {
@@ -65,7 +90,7 @@ void   Phonebook::setoldest(int last) {
 }
 
 int    Phonebook::getoldest() const {
-    return this->count;
+    return this->oldest;
 }
 
 void    Phonebook::printcontacts() const {
