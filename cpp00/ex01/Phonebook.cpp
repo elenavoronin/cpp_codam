@@ -48,9 +48,7 @@ void    Phonebook::search() const {
         std::cin.ignore();
         return ;
     }
-    printf("HERE\n");
     this->contacts[index - 1].display();
-    printf("THERE\n");
     std::cin.ignore();
 }
 

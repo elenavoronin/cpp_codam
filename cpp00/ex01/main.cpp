@@ -27,6 +27,7 @@ int main() {
             }
         else {
             std::cout << "Wrong command" << std::endl;
+            break ;
         }
     }
     return 0;

@@ -14,25 +14,29 @@ Contact::~Contact() {
 }
 
 void    Contact::setContact() {
-    Contact contact;
+    std::string input;
     
     std::cout << "Enter first name" << std::endl;
-    std::cin >> contact.first_name;
+    std::getline(std::cin, input);
+    this->first_name = input;
 
     std::cout << "Enter last name" << std::endl;
-    std::cin >> contact.last_name;
+    std::getline(std::cin, input);
+    this->last_name = input;
 
     std::cout << "Enter nickname" << std::endl;
-    std::cin >> contact.nickname;
+    std::getline(std::cin, input);
+    this->nickname = input;
 
     std::cout << "Enter phone number" << std::endl;
-    std::cin >> contact.phone_number;
-
+    std::getline(std::cin, input);
+    this->phone_number = input;
+    
     std::cout << "Enter darkest secret" << std::endl;
-    std::cin >> contact.darkest_secret;
-    std::cin.ignore();
+    std::getline(std::cin, input);
+    this->darkest_secret = input;
 
-    *this = contact;
+    std::cin.ignore();
 }
 
 
