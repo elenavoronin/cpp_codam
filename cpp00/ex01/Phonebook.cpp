@@ -48,7 +48,6 @@ void    Phonebook::search() const {
     
     if (this->getcount() == 0) {
         std::cout << "Phonebook is empty" << std::endl;
-        // std::cin.ignore();
         return ;
     }
     this->printcontacts();
@@ -56,7 +55,6 @@ void    Phonebook::search() const {
     std::getline(std::cin, index);
     if (isNumber(index) == false) {
         std::cout << "Wrong index, please enter a number" << std::endl;
-        // std::cin.ignore();
         return ;
     }
     else {
@@ -70,11 +68,9 @@ void    Phonebook::search() const {
     }
     if (ind < 1 || ind > (this->getcount())) {
         std::cout << "Wrong index, enter a positive integer" << std::endl;
-        // std::cin.ignore();
         return ;
     }
     this->contacts[ind - 1].display();
-    // std::cin.ignore();
 }
 
 void    Phonebook::setcount(int last) {
