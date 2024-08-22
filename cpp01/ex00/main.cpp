@@ -9,9 +9,9 @@ int    main(void)
     Zombie *z;
 
     z = nullptr;
-    zombie.setName("Hank");
-    zombie.announce();
     z = newZombie("Hanky Panky");
     z->announce();
+    zombie.setName("Hank");
+    zombie.announce();
     delete(z);
 }

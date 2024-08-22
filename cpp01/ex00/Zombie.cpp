@@ -12,3 +12,7 @@ void Zombie::announce() {
 Zombie::~Zombie() {
     std::cout << "Zombie " << this->name << " destructor called" << std::endl;
 }
+
+void Zombie::setName(std::string name) {
+    this->name = name;
+}

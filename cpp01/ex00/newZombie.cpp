@@ -2,7 +2,7 @@
 #include <iostream>
 
 Zombie* newZombie(std::string name) {
-    Zombie* z = new Zombie();
-    z->setName(name);
-    return z;
+    Zombie *newZombie = new (Zombie);
+    newZombie->setName(name);
+    return newZombie;
 }

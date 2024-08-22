@@ -16,8 +16,6 @@ int	main(int argc, char **argv)
 	std::ifstream input_file(filename);
 	std::ofstream output_file("filename.replace");
 
-	if (s1 == s2)
-		return (0);
 	if (input_file.is_open() && output_file.is_open())	{
 		std::string line;
 		size_t	pos = 0;

@@ -11,18 +11,13 @@ private:
 
 public:
     Zombie();
-    void announce(void);
-    void setName(const std::string& newName) {
-        name = newName;
-    }
-    std::string getName(void) const {
-        return this->name;
-    }
     ~Zombie();
+    void announce(void);
+    void setName(std::string name);
 };
 
 
-void randomChump(std::string name);
 Zombie* newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif
