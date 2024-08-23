@@ -40,14 +40,3 @@ DiamondTrap::~DiamondTrap() {
 void DiamondTrap::whoAmI() {
     std::cout << "DiamondTrap name: " << Name << ", ClapTrap name: " << ClapTrap::Name << std::endl;
 }
-
-void DiamondTrap::attack(const std::string& target) {
-    if (HitPoints <= 0 || EnergyPoints <= 0)
-    {
-        std::cout << "You have not Hit or Energy Points" << std::endl;
-        return ;
-    }
-    std::cout << "DiamondTrap " << Name << " attacks " << target
-                << ", causing " << AttackDamage << " points of damage!" << std::endl;
-    EnergyPoints--;
-}
