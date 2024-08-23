@@ -14,5 +14,8 @@ int main() {
     diamond.beRepaired(3);
     diamond.whoAmI();
 
+
+    std::cout << diamond.getHitPoints() << std::endl; 
+    std::cout << diamond.getEnergyPoints() << std::endl; 
     return 0;
 }
