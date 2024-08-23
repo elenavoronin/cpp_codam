@@ -6,6 +6,7 @@
 
 int main( void ) {
     ScavTrap scav("Minny");
+    ScavTrap trap(scav);
 
    scav.setAttackDamage(2);
    scav.attack("Bonny");
@@ -19,7 +20,10 @@ int main( void ) {
 
    scav.guardGate();
 
-    // std::cout << scav.getHitPoints() << std::endl; 
-    // std::cout << scav.getEnergyPoints() << std::endl; 
+    std::cout << scav.getHitPoints() << std::endl; 
+    std::cout << scav.getEnergyPoints() << std::endl; 
+    std::cout << trap.getHitPoints() << std::endl; 
+    std::cout << trap.getEnergyPoints() << std::endl; 
+    
 
 }

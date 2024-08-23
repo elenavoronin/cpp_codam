@@ -10,6 +10,7 @@ class ClapTrap {
         int         AttackDamage;
 
     public:
+        ClapTrap();
         ClapTrap(std::string Name);
         ClapTrap(const ClapTrap& copy);
         ClapTrap& operator=(const ClapTrap& copy);

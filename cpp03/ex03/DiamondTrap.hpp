@@ -2,6 +2,7 @@
 
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
+#include "ClapTrap.hpp"
 #include <string>
 
 class DiamondTrap : public ScavTrap, public FragTrap {
@@ -9,6 +10,7 @@ class DiamondTrap : public ScavTrap, public FragTrap {
         std::string Name;
 
     public:
+        DiamondTrap();
         DiamondTrap(std::string Name);
         DiamondTrap(const DiamondTrap& copy);
         DiamondTrap& operator=(const DiamondTrap& copy);

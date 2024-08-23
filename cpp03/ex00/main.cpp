@@ -5,6 +5,7 @@
 #include <cmath>
 
 int main( void ) {
+    ClapTrap clap;
     ClapTrap trap("Clive");
     ClapTrap trap2("Bonny");
 
@@ -18,9 +19,9 @@ int main( void ) {
     trap.takeDamage(3);
     trap.beRepaired(1);
 
-    // std::cout << trap.getHitPoints() << std::endl; 
-    // std::cout << trap.getEnergyPoints() << std::endl; 
-    // std::cout << trap2.getEnergyPoints() << std::endl; 
-    // std::cout << trap2.getHitPoints() << std::endl; 
+    std::cout << trap.getHitPoints() << std::endl; 
+    std::cout << trap2.getHitPoints() << std::endl; 
+    std::cout << trap.getEnergyPoints() << std::endl; 
+    std::cout << trap2.getEnergyPoints() << std::endl; 
 
 }

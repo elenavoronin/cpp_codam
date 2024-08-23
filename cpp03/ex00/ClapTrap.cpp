@@ -2,8 +2,16 @@
 #include <string>
 #include <iostream>
 
+ClapTrap::ClapTrap() {
+    std::cout << "Clap Trap default constructor called" << std::endl;
+    this->Name = "Default";
+    this->HitPoints = 10;
+    this->EnergyPoints = 10;
+    this->AttackDamage = 0;
+}
+
 ClapTrap::ClapTrap(std::string Name) {
-    std::cout << "Constructor called" << std::endl;
+    std::cout << "Clap Trap constructor with parameters called" << std::endl;
     this->Name = Name;
     this->HitPoints = 10;
     this->EnergyPoints = 10;
@@ -16,6 +24,7 @@ ClapTrap::ClapTrap(const ClapTrap& copy) {
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& copy) {
+    std::cout << "ClapTrap assignment operator called" << std::endl;
     if (this != &copy)
     {
         this->Name = copy.Name;
@@ -53,8 +62,9 @@ void ClapTrap::beRepaired(unsigned int amount) {
         std::cout << "You have not Hit or Energy Points" << std::endl;
         return ;
     }
-std::cout << "ClapTrap " << Name << " repairs by " << amount << " energy points!" << std::endl;
+    std::cout << "ClapTrap " << Name << " repairs by " << amount << " energy points!" << std::endl;
    EnergyPoints--;
+   HitPoints += amount;
 }
 
 void ClapTrap::setAttackDamage(int amount) {

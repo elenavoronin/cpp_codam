@@ -2,8 +2,16 @@
 #include <string>
 #include <iostream>
 
+ScavTrap::ScavTrap() : ClapTrap() {
+    std::cout << "ScavTrap default constructor called" << std::endl;
+    Name = "Scav";
+    HitPoints = 100;
+    EnergyPoints = 50;
+    AttackDamage = 20;
+}
+
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
-    std::cout << "ScavTrap constructor called" << std::endl;
+    std::cout << "ScavTrap constructor with parameters called" << std::endl;
     Name = name;
     HitPoints = 100;
     EnergyPoints = 50;
@@ -12,6 +20,7 @@ ScavTrap::ScavTrap(std::string name) : ClapTrap(name) {
 
 ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy) {
     std::cout << "ScavTrap copy constructor called" << std::endl;
+    *this = copy;
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& copy) {
