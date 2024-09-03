@@ -1,8 +1,6 @@
 #include "ScavTrap.hpp"
 #include <iostream>
-#include <stdio.h>
 #include <string>
-#include <cmath>
 
 int main( void ) {
     ScavTrap scav("Minny");

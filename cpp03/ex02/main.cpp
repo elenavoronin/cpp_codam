@@ -1,8 +1,6 @@
 #include "FragTrap.hpp"
 #include <iostream>
-#include <stdio.h>
 #include <string>
-#include <cmath>
 
 int main( void ) {
     FragTrap frag("Boris");

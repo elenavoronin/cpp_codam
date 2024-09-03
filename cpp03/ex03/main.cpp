@@ -1,10 +1,6 @@
 #include "DiamondTrap.hpp"
 #include <iostream>
-#include <stdio.h>
 #include <string>
-#include <cmath>
-
-#include "DiamondTrap.hpp"
 
 int main() {
     DiamondTrap diamond("Sparkly little devil");

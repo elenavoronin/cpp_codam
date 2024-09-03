@@ -1,8 +1,6 @@
 #include "ClapTrap.hpp"
 #include <iostream>
-#include <stdio.h>
 #include <string>
-#include <cmath>
 
 int main( void ) {
     ClapTrap clap;
