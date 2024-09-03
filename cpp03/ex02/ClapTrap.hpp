@@ -16,7 +16,6 @@ class ClapTrap {
         ClapTrap& operator=(const ClapTrap& copy);
         ~ClapTrap();
 
-        std::string getName();
         int getAttackDamage();
         int getHitPoints();
         int getEnergyPoints();

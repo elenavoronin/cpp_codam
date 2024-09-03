@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 
-DiamondTrap::DiamondTrap() :  ClapTrap(), ScavTrap(), FragTrap() {
+DiamondTrap::DiamondTrap() :  ClapTrap("Diamond_clap_name"), ScavTrap(), FragTrap() {
     std::cout << "DiamondTrap default constructor called" << std::endl;
     Name = "Diamond";
     HitPoints = FragTrap::getHitPoints();
@@ -10,7 +10,7 @@ DiamondTrap::DiamondTrap() :  ClapTrap(), ScavTrap(), FragTrap() {
     AttackDamage = FragTrap::getAttackDamage();
 }
 
-DiamondTrap::DiamondTrap(std::string name) :  ClapTrap(name + "_clap_name"), ScavTrap(name), FragTrap(name) {
+DiamondTrap::DiamondTrap(std::string name) : ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name") {
     std::cout << "DiamondTrap constructor with parameters called" << std::endl;
     this->Name = name;
     this->HitPoints = FragTrap::getHitPoints();
