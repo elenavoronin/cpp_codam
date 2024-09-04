@@ -1,5 +1,5 @@
-#include "Animal.hpp"
-#include "Dog.hpp"
+#include "../include/Animal.hpp"
+#include "../include/Dog.hpp"
 #include <iostream>
 #include <string>
 
