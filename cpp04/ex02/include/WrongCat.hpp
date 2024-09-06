@@ -8,6 +8,6 @@ class WrongCat: public WrongAnimal {
         WrongCat();
         WrongCat(const WrongCat& copy);
         WrongCat& operator=(const WrongCat& copy);
-        virtual ~WrongCat();
-        virtual void makeSound() const override;
+        ~WrongCat();
+        void makeSound() const;
 };

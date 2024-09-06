@@ -4,6 +4,7 @@
 
 Brain::Brain() {
     std::cout << "Brain constructor called" << std::endl;
+    this->ideas[0] = "I am pretty";
 }
 
 Brain::Brain(const Brain& copy) {
