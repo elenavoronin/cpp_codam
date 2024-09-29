@@ -14,5 +14,5 @@ class RobotomyRequestForm : public AForm {
         RobotomyRequestForm& operator=(const RobotomyRequestForm& copy);
         ~RobotomyRequestForm();
         std::string getTarget() const;
-        void beSigned(const Bureaucrat& b) override;
+        void action() const override;
 };

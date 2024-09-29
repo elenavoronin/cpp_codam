@@ -1,28 +1,49 @@
+#include "./include/ShrubberyCreationForm.hpp"
+#include "./include/RobotomyRequestForm.hpp"
+#include "./include/PresidentialPardonForm.hpp"
 #include "./include/Bureaucrat.hpp"
-#include "./include/Form.hpp"
 #include <iostream>
-#include <string>
 
 int main() {
     try {
-        Bureaucrat b1("John", 50);
-        Form f1("Form1", 45, 30);
-        b1.signForm(f1);
+        std::cout << "=== TEST 1: Shrubbery Creation Form ===" << std::endl;
+        // Bureaucrat with a grade high enough to sign and execute the form
+        Bureaucrat gardener("Gardener", 130);
+        ShrubberyCreationForm shrubForm("garden");
 
-        Bureaucrat b2("Jane", 20);
-        Form f2("Form2", 15, 10);
-        b2.signForm(f2);
-        
-        Bureaucrat b3("Alice", 5);
-        Form f3("Form3", 4, 2);
-        b3.signForm(f3);
+        gardener.signForm(shrubForm);  // Should succeed
+        gardener.executeForm(shrubForm);  // Should execute and create the shrubbery file
 
-        // This should fail
-        Bureaucrat b4("Bob", 1);
-        Form f4("Form4", 50, 30);
-        b4.signForm(f4);
-    }
-    catch (const std::exception& e) {
+        std::cout << "\n=== TEST 2: Robotomy Request Form ===" << std::endl;
+        // Bureaucrat with high enough grade to sign but not execute
+        Bureaucrat intern("Intern", 70);
+        RobotomyRequestForm robotomyForm("target");
+
+        intern.signForm(robotomyForm);  // Should succeed
+        intern.executeForm(robotomyForm);  // Should fail (grade too low for execution)
+
+        Bureaucrat seniorEngineer("Senior Engineer", 40);
+        seniorEngineer.executeForm(robotomyForm);  // Should execute the robotomy
+
+        std::cout << "\n=== TEST 3: Presidential Pardon Form ===" << std::endl;
+        // Bureaucrat with a grade high enough to sign but too low to execute
+        Bureaucrat assistant("Assistant", 24);
+        PresidentialPardonForm pardonForm("Prisoner");
+
+        assistant.signForm(pardonForm);  // Should succeed
+        assistant.executeForm(pardonForm);  // Should fail (grade too low for execution)
+
+        Bureaucrat president("President", 1);
+        president.executeForm(pardonForm);  // Should execute the pardon
+
+        std::cout << "\n=== TEST 4: Form Not Signed ===" << std::endl;
+        // Bureaucrat trying to execute a form that wasn't signed
+        ShrubberyCreationForm unSignedForm("backyard");
+        Bureaucrat junior("Junior", 130);
+
+        junior.executeForm(unSignedForm);  // Should fail because the form is not signed
+
+    } catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;
     }
 

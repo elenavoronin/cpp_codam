@@ -1,6 +1,7 @@
 #include "../include/ShrubberyCreationForm.hpp"
 #include <string>
 #include <iostream>
+#include <fstream>
 
 ShrubberyCreationForm::ShrubberyCreationForm() : AForm() {
     std::cout << "Shrubbery creation form default constructor called" << std::endl;
@@ -18,7 +19,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy) 
     *this = copy;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy) : AForm() {
+ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy) {
     std::cout << "Shrubbery creation form assignment operator called" << std::endl;
     if (this != &copy)
     {
@@ -36,9 +37,18 @@ std::string ShrubberyCreationForm::getTarget() const {
     return this->target;
 }
 
-void ShrubberyCreationForm::beSigned(const Bureaucrat& b) {
-    if (b.getGrade() <= this->getGradeToSign())
-        this->isSigned = true;
+void ShrubberyCreationForm::action() const {
+    std::ofstream newFile(this->getTarget() + "_shrubbery");
+    if (newFile.is_open()) {
+        newFile << "       ^\n";
+        newFile << "      ^^^\n";
+        newFile << "     ^^^^^\n";
+        newFile << "    ^^^^^^^\n";
+        newFile << "   ^^^^^^^^^\n";
+        newFile << "  ^^^^^^^^^^^\n";
+        newFile << "      |||\n";
+    }
     else
-        throw GradeTooLowException();
+        std::cout << "Could not open file" << std::endl;
+    newFile.close();
 }

@@ -59,3 +59,15 @@ std::ostream& operator<<(std::ostream& os, const AForm& f) {
     << " Grade to Execute: " << f.getGradeToExecute();
     return os;
 }
+
+void AForm::action() const {
+    std::cout << "Default action" << std::endl;
+}
+
+void AForm::execute(Bureaucrat const & executor) const {
+    if (this->isSigned == true)
+    {
+        if (executor.getGrade() <= this->gradeToExecute)
+            this->action();
+    }
+}

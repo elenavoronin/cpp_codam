@@ -33,7 +33,9 @@ class AForm {
                     return "grade too low";
                 }
         };
-        virtual void beSigned(const Bureaucrat& f) = 0;
+        void beSigned(const Bureaucrat& f);
+        virtual void action() const = 0;
+        void execute(Bureaucrat const & executor) const;
 
 };
 

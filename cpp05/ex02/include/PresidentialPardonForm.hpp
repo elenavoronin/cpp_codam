@@ -14,5 +14,5 @@ class PresidentialPardonForm : public AForm {
         PresidentialPardonForm& operator=(const PresidentialPardonForm& copy);
         ~PresidentialPardonForm();
         std::string getTarget() const;
-        void beSigned(const Bureaucrat& b) override;
+        void action() const override;
 };

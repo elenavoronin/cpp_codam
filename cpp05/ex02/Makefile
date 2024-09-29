@@ -6,14 +6,16 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/09/14 15:29:16 by evoronin      ########   odam.nl          #
+#    Updated: 2024/09/29 16:32:44 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = form
-SRCS = main.cpp ./src/Bureaucrat.cpp ./src/Form.cpp
+SRCS = main.cpp ./src/Bureaucrat.cpp ./src/AForm.cpp ./src/PresidentialPardonForm.cpp \
+	./src/RobotomyRequestForm.cpp ./src/ShrubberyCreationForm.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./include/Bureaucrat.hpp ./include/Form.hpp
+INCLUDE = ./include/AForm.hpp ./include/Bureaucrat.hpp ./include/PresidentialPardonForm.hpp \
+	./include/RobotomyRequestForm.hpp ./include/ShrubberyCreationForm.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror 
 
