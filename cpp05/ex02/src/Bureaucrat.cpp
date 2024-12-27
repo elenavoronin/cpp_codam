@@ -2,17 +2,16 @@
 #include <iostream>
 #include <string>
 
-
-Bureaucrat::Bureaucrat() : Name("Bob"), grade(75) {
+Bureaucrat::Bureaucrat() : _name("Bob"), _grade(75) {
     std::cout << "Bureaucrat default constructor called" << std::endl;
 }
 
-Bureaucrat::Bureaucrat(std::string Name, int grade): Name(Name), grade(grade) {
+Bureaucrat::Bureaucrat(const std::string Name, int grade): _name(Name), _grade(grade) {
     std::cout << "Bureaucrat parameter constructor called" << std::endl;
     if (grade < 1)
-        throw GradeTooLowException();
-    else if (grade > 150)
         throw GradeTooHighException();
+    else if (grade > 150)
+        throw GradeTooLowException();
 
 }
 
@@ -25,8 +24,7 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat& copy) {
     std::cout << "Bureaucrat assignment operator called" << std::endl;
     if (this != &copy)
     {
-        this->Name = copy.getName();
-        this->grade = copy.getGrade();
+        this->_grade = copy.getGrade();
     }
     return *this;
 }
@@ -36,30 +34,34 @@ Bureaucrat::~Bureaucrat() {
 }
 
 std::string Bureaucrat::getName() const {
-    return this->Name;
+    return this->_name;
 }
 
 int Bureaucrat::getGrade() const {
-    return this->grade;
+    return this->_grade;
+}
+
+void Bureaucrat::setGrade(int newGrade) {
+    if (newGrade < 1)
+        throw GradeTooHighException();
+    else if (newGrade > 150)
+        throw GradeTooLowException();
+    this->_grade = newGrade;
 }
 
 void Bureaucrat::increment() {
-    if (grade == (this->getGrade() - 1) < 1)
-        throw GradeTooHighException();
-    grade--;
+    this->setGrade(this->_grade++);
 }
 
+
 void Bureaucrat::decrement() {
-    if (grade == (this->getGrade() + 1) > 150)
-        throw GradeTooLowException();
-    grade++;
+    this->setGrade(this->_grade--);
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b) {
     os << b.getName() << ", bureaucrat grade " << b.getGrade();
     return os;
 }
-
 
 void Bureaucrat::signForm(AForm& form) {
     try {
@@ -73,8 +75,12 @@ void Bureaucrat::signForm(AForm& form) {
 }
 
 void Bureaucrat::executeForm(AForm const& form) {
-    if (grade <= form.getGradeToExecute())
+try {
+        form.execute(*this); // Delegate execution responsibility to the form
         std::cout << this->getName() << " executed " << form.getName() << std::endl;
-    else
-        std::cout << "Execution failed, grade for execution too low" << std::endl;
+    } 
+    catch (const std::exception& e) { // Catch any exception derived from std::exception
+        std::cout << this->getName() << " couldn't execute " 
+                  << form.getName() << " because " << e.what() << std::endl;
+    }
 }

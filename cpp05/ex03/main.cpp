@@ -18,7 +18,7 @@ int main() {
     }
 
     // Test making a RobotomyRequestForm
-    AForm* robotomy = someIntern.makeForm("robotomy request", "Target");
+    AForm* robotomy = someIntern.makeForm("robotomy request", "Mini");
     if (robotomy) {
         bob.signForm(*robotomy);
         bob.executeForm(*robotomy);

@@ -4,6 +4,7 @@
 #include "../include/PresidentialPardonForm.hpp"
 #include <iostream>
 #include <map>
+#include <functional>
 
 
 Intern::Intern() {
@@ -26,37 +27,19 @@ Intern::~Intern() {
 }
 
 AForm* Intern::makeForm(const std::string formName, const std::string target) const {
-    enum FormType { SHRUBBERY = 1, ROBOTOMY, PRESIDENTIAL };
-    FormType formType;
-    if (formName == "shrubbery creation") {
-        formType = SHRUBBERY;
+    static const std::map<std::string, std::function<AForm*(const std::string&)>> formFactory = {
+        {"shrubbery creation", [](const std::string& target) { return new ShrubberyCreationForm(target); }},
+        {"robotomy request", [](const std::string& target) { return new RobotomyRequestForm(target); }},
+        {"presidential pardon", [](const std::string& target) { return new PresidentialPardonForm(target); }}
+    };
+
+    std::map<std::string, std::function<AForm*(const std::string&)>>::const_iterator it = formFactory.find(formName);
+
+    if (it != formFactory.end()) {
+        std::cout << "Intern creates " << formName << std::endl;
+        return it->second(target); // Call the corresponding lambda to create the form
     }
-    else if (formName == "robotomy request") {
-        formType = ROBOTOMY;
-    }
-    else if (formName == "presidential pardon") {
-        formType = PRESIDENTIAL;
-    }
-    else {
-        std::cout << "This form type is not supported" << std::endl;
-        return nullptr;
-    }
-    switch (formType) {
-        case 1: {
-            std::cout << "Intern creates " << formName << std::endl;
-            return new ShrubberyCreationForm(target);
-        }
-        case 2: {
-            std::cout << "Intern creates " << formName << std::endl;
-            return new RobotomyRequestForm(target);
-        }
-        case 3: {
-            std::cout << "Intern creates " << formName << std::endl;
-            return new PresidentialPardonForm(target);       
-        }
-        default: {
-            std::cout << "This form type is not supported" << std::endl;
-            return nullptr;
-        }
-    }
-}
+
+    std::cout << "This form type is not supported" << std::endl;
+    return nullptr;
+}   

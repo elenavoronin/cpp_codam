@@ -3,28 +3,24 @@
 #include <string>
 #include <iostream>
 
-AForm::AForm() : Name("Default AForm"), isSigned(false), gradeToSign(2), gradeToExecute(15) {
+AForm::AForm() : _name("Default AForm"), _isSigned(false), _gradeToSign(2), _gradeToExecute(15) {
     std::cout << "AForm default constructor called" << std::endl;
 }
 
-AForm::AForm(std::string Name, int gradeToSign, int gradeToExecute) :
-    Name(Name), isSigned(false), gradeToSign(gradeToSign), gradeToExecute(gradeToExecute) {
+AForm::AForm(const std::string Name, const int gradeToSign, const int gradeToExecute) :
+    _name(Name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute) {
     std::cout << "AForm parameter constructor called" << std::endl;
 
 }
 
-AForm::AForm(const AForm& copy) {
+AForm::AForm(const AForm& copy) : _name(copy._name), _isSigned(copy._isSigned), _gradeToSign(copy._gradeToSign), _gradeToExecute(copy._gradeToExecute) {
     std::cout << "AForm copy constructor called" << std::endl;
-    *this = copy;
 }
 
 AForm& AForm::operator=(const AForm& copy) {
     if (this != &copy)
     {
-        this->Name = copy.Name;
-        this->isSigned = copy.isSigned;
-        this->gradeToExecute = copy.gradeToExecute;
-        this->gradeToSign = copy.gradeToSign;
+        this->_isSigned = copy._isSigned;
     }
     return *this;
 }
@@ -34,21 +30,23 @@ AForm::~AForm() {
 }
 
 std::string AForm::getName() const {
-    return this->Name;
+    return this->_name;
 }
 int AForm::getGradeToSign() const {
-    return this->gradeToSign;
+    return this->_gradeToSign;
 }
 int AForm::getGradeToExecute() const {
-    return this->gradeToExecute;
+    return this->_gradeToExecute;
 }
 bool AForm::getIsSigned() const {
-    return this->isSigned;
+    return this->_isSigned;
 }
 
 void AForm::beSigned(const Bureaucrat& b) {
+    if (_isSigned == true)
+        throw FormAlreadySignedException();
     if (b.getGrade() <= this->getGradeToSign())
-        this->isSigned = true;
+        this->_isSigned = true;
     else
         throw GradeTooLowException();
 }
@@ -65,9 +63,14 @@ void AForm::action() const {
 }
 
 void AForm::execute(Bureaucrat const & executor) const {
-    if (this->isSigned == true)
+    if (this->_isSigned == true)
     {
-        if (executor.getGrade() <= this->gradeToExecute)
+        if (executor.getGrade() <= this->_gradeToExecute)
             this->action();
+        else
+            throw GradeTooLowException();
     }
+    else
+        throw FormNotSignedException();
+
 }

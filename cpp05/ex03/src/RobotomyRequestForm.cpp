@@ -7,16 +7,12 @@ RobotomyRequestForm::RobotomyRequestForm() : AForm() {
     std::cout << "Robotomy request form default constructor called" << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm() {
+RobotomyRequestForm::RobotomyRequestForm(std::string target) : AForm("RobotomyRequestForm", 72, 45), _target(target) {
     std::cout << "Robotomy request form parameter constructor called" << std::endl;
-    this->target = target;
-    this->gradeToSign = 72;
-    this->gradeToExecute = 45;
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy) : AForm() {
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& copy) : AForm(copy.getName(), copy.getGradeToSign(), copy.getGradeToExecute()), _target(copy._target) {
     std::cout << "Robotomy request form copy constructor called" << std::endl;
-    *this = copy;
 }
 
 RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& copy) {
@@ -24,7 +20,6 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& c
     if (this != &copy)
     {
         AForm::operator=(copy);
-        this->target = copy.target;   
     }
     return *this;
 }
@@ -34,7 +29,7 @@ RobotomyRequestForm::~RobotomyRequestForm() {
 }
 
 std::string RobotomyRequestForm::getTarget() const {
-    return this->target;
+    return this->_target;
 }
 
 void RobotomyRequestForm::action() const {
@@ -42,5 +37,5 @@ void RobotomyRequestForm::action() const {
     if (rand() % 2 == 0)
         std::cout << this->getTarget() << "has been robotomized successfully" << std::endl;
     else
-        std::cout << this->getTarget() << "robotomy failed" << std::endl;
+        std::cout << this->getTarget() << " robotomy failed" << std::endl;
 }

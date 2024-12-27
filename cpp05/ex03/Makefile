@@ -6,7 +6,7 @@
 #    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
 #                                                    +#+                       #
 #    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2024/09/29 16:43:30 by evoronin      ########   odam.nl          #
+#    Updated: 2024/12/27 17:49:46 by evoronin      ########   odam.nl          #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ $(NAME): $(OBJS)
 
 clean:
 	@rm -f $(OBJS)
+	@rm -f *_shrubbery
 
 fclean: clean
 	@rm -f $(NAME)

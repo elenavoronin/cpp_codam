@@ -7,16 +7,12 @@ ShrubberyCreationForm::ShrubberyCreationForm() : AForm() {
     std::cout << "Shrubbery creation form default constructor called" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm() {
+ShrubberyCreationForm::ShrubberyCreationForm(std::string target) : AForm("ShrubberyCreationForm", 145, 137), _target(target){
     std::cout << "Shrubbery creation form parameter constructor called" << std::endl;
-    this->target = target;
-    this->gradeToSign = 145;
-    this->gradeToExecute = 137;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy) : AForm() {
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& copy) : AForm(copy.getName(), copy.getGradeToSign(), copy.getGradeToExecute()), _target(copy._target)  {
     std::cout << "Shrubbery creation form copy constructor called" << std::endl;
-    *this = copy;
 }
 
 ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& copy) {
@@ -24,7 +20,6 @@ ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationF
     if (this != &copy)
     {
         AForm::operator=(copy);
-        this->target = copy.target;   
     }
     return *this;
 }
@@ -34,7 +29,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm() {
 }
 
 std::string ShrubberyCreationForm::getTarget() const {
-    return this->target;
+    return this->_target;
 }
 
 void ShrubberyCreationForm::action() const {

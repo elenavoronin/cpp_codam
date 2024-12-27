@@ -8,19 +8,20 @@ class Form;
 
 class Bureaucrat {
     private:
-        std::string Name;
-        int         grade;
+        const std::string       _name;
+        int                     _grade;
     public:
         Bureaucrat();
-        Bureaucrat(std::string Name, int grade);
+        Bureaucrat(const std::string Name, int grade);
         Bureaucrat(const Bureaucrat& copy);
         Bureaucrat& operator=(const Bureaucrat& copy);
         ~Bureaucrat();
 
-        std::string getName() const;
-        int getGrade() const;
-        void increment();
-        void decrement();
+        std::string             getName() const;
+        int                     getGrade() const;
+        void                    setGrade(int grade);
+        void                    increment();
+        void                    decrement();
 
         class GradeTooHighException:  public std::exception {
             public:

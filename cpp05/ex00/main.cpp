@@ -7,10 +7,10 @@ int main() {
         Bureaucrat b1("John", 151); // Will throw GradeTooLowException
         std::cout << b1 << std::endl;
     }
-    catch (const Bureaucrat::GradeTooHighException& e) {
+    catch (const Bureaucrat::GradeTooLowException& e) {
         std::cout << e.what() << std::endl;
     }
-    catch (const Bureaucrat::GradeTooLowException& e) {
+    catch (const Bureaucrat::GradeTooHighException& e) {
         std::cout << e.what() << std::endl;
     }
     catch (const std::exception& e) {

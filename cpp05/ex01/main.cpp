@@ -21,6 +21,9 @@ int main() {
         Bureaucrat b4("Bob", 1);
         Form f4("Form4", 50, 30);
         b4.signForm(f4);
+
+        Bureaucrat b5("Kathy", 2);
+        b4.signForm(f4);
     }
     catch (const std::exception& e) {
         std::cerr << e.what() << std::endl;

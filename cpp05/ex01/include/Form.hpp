@@ -7,13 +7,13 @@ class Bureaucrat;
 
 class Form {
     private:
-        std::string Name;
-        bool        isSigned;
-        int         gradeToSign;
-        int         gradeToExecute;
+        const std::string               _name;
+        bool                            _isSigned;
+        const int                       _gradeToSign;
+        const int                       _gradeToExecute;
     public:
         Form();
-        Form(std::string Name, int gradeToSign, int gradeToExecute);
+        Form(const std::string Name, const int gradeToSign, const int gradeToExecute);
         Form(const Form& copy);
         Form& operator=(const Form& copy);
         ~Form();
@@ -33,6 +33,15 @@ class Form {
                     return "grade too low";
                 }
         };
+
+        class FormAlreadySignedException:  public std::exception {
+            public:
+
+                const char* what() const throw() {
+                    return "the form has already been signed";
+                }
+        };
+        
         void beSigned(const Bureaucrat& f);
 
 };
