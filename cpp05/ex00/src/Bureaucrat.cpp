@@ -51,11 +51,11 @@ void Bureaucrat::setGrade(int newGrade) {
 }
 
 void Bureaucrat::increment() {
-    this->setGrade(this->_grade++);
+    this->setGrade(--this->_grade);
 }
 
 void Bureaucrat::decrement() {
-    this->setGrade(this->_grade--);
+    this->setGrade(++this->_grade);
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b) {

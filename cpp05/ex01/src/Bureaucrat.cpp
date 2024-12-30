@@ -51,11 +51,11 @@ void Bureaucrat::setGrade(int newGrade) {
 }
 
 void Bureaucrat::increment() {
-    this->setGrade(this->_grade++);
+    this->setGrade(--this->_grade);
 }
 
 void Bureaucrat::decrement() {
-    this->setGrade(this->_grade--);
+    this->setGrade(++this->_grade);
 }
 
 std::ostream& operator<<(std::ostream& os, const Bureaucrat& b) {
@@ -68,7 +68,7 @@ void Bureaucrat::signForm(Form& form) {
         form.beSigned(*this);
         std::cout << this->getName() << " signed " << form.getName() << std::endl;
     }
-    catch (const Form::GradeTooLowException& e) {
+    catch (const std::exception& e) {
         std::cout << this->getName() << " couldn't sign " 
         << form.getName() << ", because " << e.what() << std::endl;
     }
