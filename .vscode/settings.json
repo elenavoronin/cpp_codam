@@ -81,6 +81,7 @@
 		"iomanip": "cpp",
 		"codecvt": "cpp",
 		"stack": "cpp",
-		"cinttypes": "cpp"
+		"cinttypes": "cpp",
+		"map": "cpp"
 	}
 }
