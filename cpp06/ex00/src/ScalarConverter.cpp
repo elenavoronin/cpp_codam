@@ -21,11 +21,10 @@ ScalarConverter::~ScalarConverter() {
 
 
 bool isInt(std::string str) {
-    char start = str[0];
-    if (start == '+' || start == '_')
-        start = 1;
-    start = 0;
-    for (char c : str + start) {
+    int i = 0;
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    for (char c : str.substr(i)) {
         if (!isdigit(c))
             return false;
     }
@@ -39,11 +38,11 @@ bool isChar(std::string str) {
 }
 
 bool isFloat(std::string str) {
-    char start = str[0];
-    if (start == '+' || start == '_')
-        start = 1;
-    start = 0;
-    if (str + start == "inff" || str + start == "nanf")
+    int i = 0;
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    std::string string = str.substr(i);
+    if (string.compare("-inff") || string.compare("+inff") || string.compare("nanf"))
         return true;
     for (char c : str) {
         if (c != '.' && c != 'f' && !isdigit(c))
@@ -53,11 +52,11 @@ bool isFloat(std::string str) {
 }
 
 bool isDouble(std::string str) {
-    char start = str[0];
-    if (start == '+' || start == '_')
-        start = 1;
-    start = 0;
-    if (str + start == "inf" || str + start == "nan")
+    int i = 0;
+    if (str[i] == '+' || str[i] == '-')
+        i++;
+    std::string string = str.substr(i);
+    if (string.compare("-inf") || string.compare("+inf") || string.compare("nan"))
         return true;
     for (char c : str) {
         if (c != '.' && !isdigit(c))
@@ -66,13 +65,23 @@ bool isDouble(std::string str) {
     return true;
 }
 
-void printChar(const std::string str) {
+bool checkLimit(void *data) {
+    int value = *static_cast<int*>(data);
+    bool found = false;
+    for (unsigned long i = 0; i < sizeof(CHAR_LIMIT) / sizeof(CHAR_LIMIT[0]); i++) {
+        if (value == CHAR_LIMIT[i]) {
+            return true;
+        }
+    }
+    return found;
+}
 
-    if (int(str[1]) = CHAR_LIMIT)
-        std::cout << "char: " << str[1] << std::endl;
+void printChar(const std::string str) {
+    char c = str[1];
+    if (!checkLimit(&c) && c > 0)
+        std::cout << "char: " << c << std::endl;
     else
         std::cout << "char: not convertable" << std::endl;
-
     std::cout << "int: " <<  static_cast<int>(str[1]) << std::endl;
     std::cout << "float: " << static_cast<float>(str[1]) << std::endl;
     std:: cout << "double: " << static_cast<double>(str[1]) << std::endl;
@@ -80,8 +89,9 @@ void printChar(const std::string str) {
 
 void printInt(const std::string str) {
     int result = std::stoi(str);
+    std::cout << result << std::endl;
 
-    if (result = CHAR_LIMIT)
+    if (!checkLimit(&result) && result < INT_MAX && result > INT_MIN)
         std::cout << "char: " << static_cast<char>(result) << std::endl;
     else
         std::cout << "char: not convertable" << std::endl;
@@ -93,42 +103,60 @@ void printInt(const std::string str) {
 void printFloat(const std::string str) {
     float result = std::stof(str);
 
-    if (result = CHAR_LIMIT)
+    if (!checkLimit(&result) && !str.compare("nanf") && !str.compare("+inff") && !str.compare("-inff"))
         std::cout << "char: " << static_cast<char>(result) << std::endl;
     else
         std::cout << "char: not convertable" << std::endl;
 
-    std::cout << "int: " <<  static_cast<int>(result) << std::endl;
-    std::cout << "float: " << result  << std::endl;
-    std:: cout << "double: " << static_cast<double>(result) << std::endl;
+    if (static_cast<int>(result) < INT_MAX && static_cast<int>(result) > INT_MIN)
+        std::cout << "int: " <<  static_cast<int>(result) << std::endl;
+    else
+        std::cout << "int: " <<  "not convertible" << std::endl;
+    std::cout << "float: " << result << std::endl;
+    if (str.compare("nanf") || str.compare("-inff") || str.compare("+inff"))
+        std::cout << "double: " << str.substr(0, str.size() - 1) << std::endl;
+    else
+        std:: cout << "double: " << static_cast<double>(result) << std::endl;
 }
+
 
 void printDouble(const std::string str) {
     double result = std::stod(str);
 
-    if (result = CHAR_LIMIT)
+    if (!checkLimit(&result) && !str.compare("nan") && !str.compare("+inf") && !str.compare("-inf"))
         std::cout << "char: " << static_cast<char>('0' + result) << std::endl;
     else
         std::cout << "char: not convertable" << std::endl;
-    std::cout << "int: " <<  static_cast<int>(result) << std::endl;
-    std::cout << "float: " << static_cast<float>(result) << std::endl;
+    if (static_cast<int>(result) < INT_MAX && static_cast<int>(result) > INT_MIN)
+        std::cout << "int: " <<  static_cast<int>(result) << std::endl;
+    else
+        std::cout << "int: " <<  "not convertible" << std::endl;
+    if (str.compare("nan") || str.compare("-inf") || str.compare("+inf"))
+        std::cout << "float: " << str + "f" << std::endl;
+    else
+        std::cout << "float: " << static_cast<float>(result) << std::endl;
     std:: cout << "double: " << result << std::endl;
 }
 
+
 void ScalarConverter::convert(const std::string str) {
+    std::function<void(const std::string&)> func;
     
     try {
         if (isChar(str))
-        printChar(str);
+            func = printChar;
         else if (isInt(str))
-        printInt(str);
+            func = printInt;
         else if (isFloat(str))
-        printFloat(str);
+            func = printFloat;
         else if (isDouble(str))
-        printDouble(str);
+            func = printDouble;
+        else {
+            throw std::invalid_argument("Invalid argument");
+        }
+        func(str);
     }
-    catch (std::exception e) {
-        std::cout << e.what() << std::endl;
+    catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
     }
-    
 }
