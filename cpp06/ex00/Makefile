@@ -1,21 +1,12 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         ::::::::             #
-#    Makefile                                           :+:    :+:             #
-#                                                      +:+                     #
-#    By: elenavoronin <elnvoronin@gmail.com>          +#+                      #
-#                                                    +#+                       #
-#    Created: 2023/02/03 11:47:21 by evoronin      #+#    #+#                  #
-#    Updated: 2025/04/01 15:25:23 by evoronin      ########   odam.nl          #
-#                                                                              #
-# **************************************************************************** #
 
 NAME = converter
 SRCS = main.cpp ./src/ScalarConverter.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = ./include/ScalarConverter.hpp
 CC = c++
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror -std=c++11
+INCLUDE_FLAGS = -Iinclude
+FLAGS += ${INCLUDE_FLAGS}
 
 all: $(NAME)
 
