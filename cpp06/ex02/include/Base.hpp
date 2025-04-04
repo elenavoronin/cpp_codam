@@ -8,7 +8,6 @@
 class Base {
 	private:
 	public:
-		Base();
 		virtual ~Base();
 	};
 	

@@ -9,7 +9,14 @@ int main(int argc, char **argv)
 		return 0;
 	}
 	Data data;
-	data.value = std::stoi(argv[1]);
+	try {
+		data.value = std::stoi(argv[1]);
+	}
+	catch (const std::exception &e)
+	{
+		std::cout << "Invalid argument" << std::endl;
+		return 1;
+	}
 	std::cout << "value: "<< data.value << std::endl;
 	Data* dataPtr = &data;
 	uintptr_t raw = Serializer::serialize(dataPtr);

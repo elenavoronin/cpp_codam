@@ -1,10 +1,6 @@
 #include "Base.hpp"
 
 
-Base::Base() {
-	std::cout << "Base was created" << std::endl;
-}
-
 Base::~Base() {
 	std::cout << "Base was destroyed" << std::endl;
 }
@@ -35,13 +31,24 @@ void identify(Base* p) {
 
 }
 void identify(Base& p) {
-	if (dynamic_cast<A*>(&p) != nullptr)
+	try {
+		(void)dynamic_cast<A&>(p);
 		std::cout << "I am a reference to A" << std::endl;
-	else if (dynamic_cast<B*>(&p) != nullptr)
+		return;
+	}
+	catch (const std::bad_cast&) {}
+	try {
+		(void)dynamic_cast<B&>(p);
 		std::cout << "I am a reference to B" << std::endl;
-	else if (dynamic_cast<C*>(&p) != nullptr)
+		return;
+	}
+	catch (const std::bad_cast&) {}
+	try {
+		(void)dynamic_cast<C&>(p);
 		std::cout << "I am a reference to C" << std::endl;
-	else
-		std::cout << "I am an unknown type" << std::endl;
+		return;	
+	}
+	catch (const std::bad_cast&) {}
+	std::cout << "I am an unknown type" << std::endl;
 
 }
