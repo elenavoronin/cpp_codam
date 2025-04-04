@@ -1,8 +1,8 @@
 
-NAME = template
-SRCS = main.cpp
+NAME = array
+SRCS = main.cpp 
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./include/template.hpp
+INCLUDE = ./include/Array.hpp ./include/Array.tpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++11
 INCLUDE_FLAGS = -Iinclude

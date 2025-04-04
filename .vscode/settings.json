@@ -83,6 +83,7 @@
 		"stack": "cpp",
 		"cinttypes": "cpp",
 		"map": "cpp",
-		"__tree": "cpp"
+		"__tree": "cpp",
+		"regex": "cpp"
 	}
 }

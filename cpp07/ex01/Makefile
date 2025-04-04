@@ -1,8 +1,8 @@
 
-NAME = template
+NAME = iter
 SRCS = main.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./include/template.hpp
+INCLUDE = ./include/iter.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++11
 INCLUDE_FLAGS = -Iinclude
