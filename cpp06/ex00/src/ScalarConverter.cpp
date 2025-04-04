@@ -44,11 +44,8 @@ bool isFloat(std::string str) {
     std::string string = str.substr(i);
     if (string == "inff" || string == "nanf")
         return true;
-    for (char c : str) {
-        if (c != '.' && c != 'f' && !isdigit(c))
-            return false;
-    }
-    return true;
+    const std::regex floatRegex(R"(^[+-]?([0-9]*[.][0-9]+|[0-9]+[.][0-9]*)([fF])?$)");
+        return std::regex_match(str, floatRegex);
 }
 
 bool isDouble(std::string str) {
@@ -58,11 +55,8 @@ bool isDouble(std::string str) {
     std::string string = str.substr(i);
     if (string == "inf" || string == "nan")
         return true;
-    for (char c : str) {
-        if (c != '.' && !isdigit(c))
-            return false;
-    }
-    return true;
+    const std::regex doubleRegex(R"(^[+-]?([0-9]*[.][0-9]+|[0-9]+[.][0-9]*)([eE][+-]?[0-9]+)?$)");
+    return std::regex_match(str, doubleRegex);
 }
 
 bool checkLimit(void *data) {
