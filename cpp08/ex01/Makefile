@@ -4,7 +4,7 @@ SRCS = main.cpp ./src/Span.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = ./include/Span.hpp
 CC = c++
-FLAGS = -Wall -Wextra -Werror -std=c++11
+FLAGS = -Wall -Wextra -Werror -std=c++17
 INCLUDE_FLAGS = -Iinclude
 FLAGS += ${INCLUDE_FLAGS}
 
