@@ -37,13 +37,11 @@ int Span::shortestSpan() {
     if (container.size() < 2)
         throw NoSpanPossible();
 
-    // std::generate(container.begin(), container.end(),
-    //     [it = container.begin()]() mutable { return (*(it++) * -1);});
     std::sort(container.begin(), container.end());
     std::vector<int> Res(getSize());
     std::adjacent_difference(container.begin(), container.end(), Res.begin());
-
-    return (*std::min(Res.begin(), Res.end()));
+    std::generate(Res.begin(), Res.end(), [it = Res.begin()]() mutable {return ( abs(*(it++)));});
+    return (*std::min_element(Res.begin() + 1, Res.end()));
 
 }
 
