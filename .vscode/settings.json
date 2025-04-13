@@ -84,6 +84,7 @@
 		"cinttypes": "cpp",
 		"map": "cpp",
 		"__tree": "cpp",
-		"regex": "cpp"
+		"regex": "cpp",
+		"*.tpp": "cpp"
 	}
 }
