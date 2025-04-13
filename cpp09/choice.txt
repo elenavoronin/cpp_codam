@@ -1,0 +1,30 @@
+1. Sorting integers using Ford-Johnson algorithm: deque and vector
+Review: The Ford-Johnson algorithm is a sorting algorithm that is based on the divide-and-conquer approach. It typically uses two queues to merge sorted segments.
+
+std::deque: Deques are double-ended queues, which are great for inserting and removing elements from both ends efficiently. However, for sorting, the std::deque may not be as efficient as std::vector when it comes to accessing elements in the middle, as vectors offer faster random access.
+
+std::vector: Vectors are well-suited for sorting due to their contiguous memory layout, which allows for faster random access and better cache locality.
+
+Conclusion: I agree that both std::deque and std::vector could work, but I would lean more toward std::vector as the primary container for the Ford-Johnson algorithm, given that the algorithm benefits from fast random access. std::deque could be useful in certain situations, but unless you're specifically manipulating both ends of the sequence during sorting, std::vector might be a better choice.
+
+2. Using 2 databases, one containing the date and exchange rate, the other date and amount to be exchanged: create std::map for both these databases and for the result that will have the date and the multiplication result
+Review:
+
+std::map is a balanced binary tree that stores key-value pairs in a sorted order. Since you're working with dates as keys and need fast lookups and sorted order, std::map is a great choice for each of the databases.
+
+First database (date and exchange rate): Using a std::map where the key is the date and the value is the exchange rate makes sense because you'll need quick lookups by date to find the corresponding exchange rate.
+
+Second database (date and amount to be exchanged): A std::map here also works well because you need to map a date to the amount being exchanged.
+
+Result database (date and multiplication result): The result is essentially a product of data from the two previous maps. Again, a std::map is appropriate because you'll store the results in date order, and looking up values will be efficient.
+
+Conclusion: This is a solid choice. Using std::map for each of these databases makes perfect sense for efficient lookups, ordered data, and managing key-value pairs.
+
+3. Processing Reverse Polish Notation: stack or list
+Review:
+
+std::stack: A std::stack is a LIFO (Last In, First Out) container, which fits perfectly with the needs of Reverse Polish Notation (RPN). In RPN, you push operands onto the stack, then pop them for operations when you encounter operators. std::stack is specifically designed for this type of use case, and it's the best choice here.
+
+std::list: A std::list is a doubly-linked list, and although it provides efficient insertions and deletions at both ends, it doesn't provide the same level of performance for stack operations (push/pop) compared to std::stack. Additionally, accessing elements in the middle of the list is slower.
+
+Conclusion: std::stack is the most appropriate container for processing Reverse Polish Notation. std::list is not needed unless you need frequent insertions/deletions from arbitrary positions, which is not the case in RPN processing.
