@@ -27,13 +27,13 @@ Intern::~Intern() {
 }
 
 AForm* Intern::makeForm(const std::string formName, const std::string target) const {
-    static const std::map<std::string, std::function<AForm*(const std::string&)>> formFactory = {
+    static const std::multimap<std::string, std::function<AForm*(const std::string&)>> formFactory = {
         {"shrubbery creation", [](const std::string& target) { return new ShrubberyCreationForm(target); }},
         {"robotomy request", [](const std::string& target) { return new RobotomyRequestForm(target); }},
         {"presidential pardon", [](const std::string& target) { return new PresidentialPardonForm(target); }}
     };
 
-    std::map<std::string, std::function<AForm*(const std::string&)>>::const_iterator it = formFactory.find(formName);
+    std::multimap<std::string, std::function<AForm*(const std::string&)>>::const_iterator it = formFactory.find(formName);
 
     if (it != formFactory.end()) {
         std::cout << "Intern creates " << formName << std::endl;

@@ -1,8 +1,8 @@
 
 NAME = bit
-SRCS = main.cpp ./src/BitcointExchange.cpp
+SRCS = main.cpp ./src/BitcoinExchange.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./include/BitcointExchange.hpp
+INCLUDE = ./include/BitcoinExchange.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++11
 INCLUDE_FLAGS = -Iinclude

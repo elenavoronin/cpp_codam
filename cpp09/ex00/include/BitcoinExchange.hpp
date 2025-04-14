@@ -10,12 +10,11 @@
 #include <sstream>
 #include <regex>
 
-
 class BitcoinExchange {
     private:
-        std::map<std::string, int>       input;
-        std::map<std::string, int>       data;
-        std::map<std::string, int>       resultMap;
+        std::multimap<std::string, std::string>      	input;
+        std::map<std::string, std::string>      		data;
+        std::multimap<std::string, std::string> 		result;
     
     public:
         BitcoinExchange();
@@ -26,17 +25,17 @@ class BitcoinExchange {
         void populateData(const std::string& file);
         void populateInput(const std::string& file);
         bool validateInput() const;
-        void printData() const;
+		void calculateResult();
+        void printMap(const std::multimap<std::string, std::string>& map) const;
 
-        const std::map<std::string, int>& getData() const;
-        const std::map<std::string, int>& getInput() const;
-        void setInput(std::map<std::string, int>& map);
+        const std::map<std::string, std::string>& getData() const;
+        const std::multimap<std::string, std::string>& getInput() const;
+        const std::multimap<std::string, std::string>& getResult() const;
+        void setInput(std::multimap<std::string, std::string>& map);
+
 
 };
 
-
+bool isValidValue(const std::string& value);
 bool isValidDate(const std::string& date);
-
-
-
-
+std::string findNextDate(const std::string &date, const std::map<std::string, std::string> &data);
