@@ -85,6 +85,7 @@
 		"map": "cpp",
 		"__tree": "cpp",
 		"regex": "cpp",
-		"*.tpp": "cpp"
+		"*.tpp": "cpp",
+		"filesystem": "cpp"
 	}
 }
