@@ -54,9 +54,9 @@ void PMergeMe::calculus() {
 }
 
 void PMergeMe::vectorSort() {
+	auto start = std::chrono::high_resolution_clock::now();
     std::vector<int> winners, losers;
     std::vector<int> vector = getVector();
-    // std::sort(vector.begin(), vector.end());
     unsigned long i = 0;
     int last;
     if (vector.size() % 2 != 0) {
@@ -82,13 +82,13 @@ void PMergeMe::vectorSort() {
     std::sort(winners.begin(), winners.end());
     ::insertBalanced(winners, losers, 0, losers.size() - 1);
     setVector(winners);
-    // std::cout << "winners vector: " << std::endl;
-    // printVector(winners);
-    // std::cout << "losers vector: " << std::endl;
-    // printVector(losers);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	setTimeVector(duration);
 }
 
 void PMergeMe::dequeSort() {
+	auto start = std::chrono::high_resolution_clock::now();
     std::deque<int> winners, losers;
     std::deque<int> deque = getDeque();
     unsigned long i = 0;
@@ -116,10 +116,9 @@ void PMergeMe::dequeSort() {
     ::insertBalanced(winners, losers, 0, losers.size() - 1);
     setDeque(winners);
 
-    // std::cout << "winners deque: " << std::endl;
-    // printDeque(winners);
-    // std::cout << "losers deque: " << std::endl;
-    // printDeque(losers);
+	auto end = std::chrono::high_resolution_clock::now();
+	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+	setTimeDeque(duration);
 }
 
 
@@ -151,4 +150,22 @@ void PMergeMe::printDeque(const std::deque<int>& deque) const {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
+}
+
+
+void PMergeMe::setTimeVector(long long ms) {
+	this->timeVector = ms;
+}
+
+void PMergeMe::setTimeDeque(long long ms) {
+	this ->timeDeque = ms;
+}
+
+long long PMergeMe::getTimeVector() const {
+	return this->timeVector;
+}
+
+
+long long PMergeMe::getTimeDeque() const {
+	return this->timeDeque;
 }
