@@ -9,10 +9,8 @@ int main(int argc, char **argv) {
 
 	BitcoinExchange be;
 	const std::string &file = argv[1];
-	be.populateInput(file);
 	be.populateData("data.csv");
-	be.calculateResult();
-	be.printMap(be.getResult());
+	be.checkInput(file);
 
 
 	return 0;

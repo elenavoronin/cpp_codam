@@ -1,5 +1,5 @@
 
-NAME = bit
+NAME = btc
 SRCS = main.cpp ./src/BitcoinExchange.cpp
 OBJS = $(SRCS:.cpp=.o)
 INCLUDE = ./include/BitcoinExchange.hpp

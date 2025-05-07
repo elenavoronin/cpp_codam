@@ -9,9 +9,7 @@ BitcoinExchange::BitcoinExchange(const BitcoinExchange &copy) {
 
 BitcoinExchange& BitcoinExchange::operator=(const BitcoinExchange &copy) {
     if (this != &copy) {
-        this->input = copy.input;
         this->data = copy.data;
-        this->result = copy.result;
     }
     return *this;
 }
@@ -27,7 +25,7 @@ void BitcoinExchange::populateData(const std::string& file) {
     while (std::getline(inputFile, line)) {
         std::istringstream lineStream(line);
         std::string key;
-        int value;
+        std::string value;
     
         if (std::getline(lineStream, key, ',') && lineStream >> value) {
             data[key] = value;
@@ -38,7 +36,7 @@ void BitcoinExchange::populateData(const std::string& file) {
     inputFile.close();
 }
 
-void BitcoinExchange::populateInput(const std::string& file) {
+void BitcoinExchange::checkInput(const std::string& file) {
     std::ifstream inputFile(file);
     std::multimap<std::string, std::string> input;
     if (!inputFile.is_open()) {
@@ -53,18 +51,17 @@ void BitcoinExchange::populateInput(const std::string& file) {
 			continue;
 		
         if (std::getline(lineStream, key, '|') && lineStream >> value) {
-			key.erase(std::remove(key.begin(), key.end(), ' '), key.end());
-			value.erase(std::remove(value.begin(), value.end(), ' '), value.end());
-			input.insert(std::make_pair(key, value));
+            if (key == "date" || value == "value")
+                continue;
+			key.erase(std::find(key.begin(), key.end(), ' '), key.end());
+			value.erase(std::find(value.begin(), value.end(), ' '), value.end());
+            calculateResult(key, value);
         }
         else {
-			input.insert(std::make_pair("Error: " + line, ": bad input"));
-		}
-			
+            std::cout << "Error: bad Input => " << key << " " << value << std::endl;
+        }
     }
     inputFile.close();
-	printMap(input);
-    setInput(input);
 }
 
 
@@ -79,63 +76,76 @@ const std::map<std::string, std::string>& BitcoinExchange::getData() const {
 	return this->data;
 }
 
-const std::multimap<std::string, std::string>& BitcoinExchange::getInput() const {
-	return this->input;
+float BitcoinExchange::isValidDate(const std::string& date, const std::map<std::string, std::string>& data) {
+    std::tm     tm{};
+    std::string rate;
+    float       finalRate = -1;
+    try {
+        tm.tm_year = std::stoi(date.substr(0, 4)) - 1900;
+        tm.tm_mon = std::stoi(date.substr(5, 2)) - 1;
+        tm.tm_mday = std::stoi(date.substr(8,2));
+    }
+    catch (std::exception &e) {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return -1;
+    }
+    std::tm tmCheck{};
+    tmCheck.tm_year = tm.tm_year;
+    tmCheck.tm_mon = tm.tm_mon;
+    tmCheck.tm_mday = tm.tm_mday;
+    if (std::mktime(&tm) == -1 || tmCheck.tm_year != tm.tm_year || tmCheck.tm_mon != tm.tm_mon || tmCheck.tm_mday!= tm.tm_mday) {
+        std::cout << "Error: invalid date => " << date << std::endl;
+        return -1;
+    }
+    for (auto it = data.begin(); it != data.end(); ++it) {
+        if (it->first <= date) {
+            rate = it->second;
+        }
+    }
+    try
+    {
+        finalRate = std::stof(rate);
+    }
+    catch(const std::exception& e)
+    {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return -1;
+    }
+    
+    return finalRate;
 }
 
-const std::multimap<std::string, std::string>& BitcoinExchange::getResult() const {
-    return this->result;
+int BitcoinExchange::isValidValue(const std::string& value) {
+    float nr = 0;
+    // std::cout << "value: " << value << std::endl;
+    try {
+        nr = std::stof(value);
+    }
+    catch (std::exception &e) {
+        std::cout << "Error: not a valid number => " << value << std::endl;
+        return -1;
+    }
+    if (nr < 0) {
+        std::cout << "Error: not a positive number => " << value << std::endl;
+        return -1;
+    }
+    if (nr > 1000)
+    {
+        std::cout << "Error: too large a number => " << value << std::endl;
+        return -1;
+    }
+	return nr;
 }
 
-void BitcoinExchange::setInput(std::multimap<std::string, std::string>& map) {
-    this->input = map;
-}
-
-bool isValidDate(const std::string& date) {
-    // Defined the regex for Year-Month-Day format
-    std::regex dateRegex(R"(^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$)");
-    return std::regex_match(date, dateRegex);
-
-}
-
-bool isValidValue(const std::string& value) {
-    std::regex valueRegex(R"(^\d+(\.\d+)?$)");
-    if (!std::regex_match(value, valueRegex))
-		return false;
-	float numericValue = std::stof(value);
-	return numericValue >= 0 && numericValue <= 1000;
-}
-
-std::string findNextDate(const std::string &date, const std::map<std::string, std::string> &data) {
-	std::string new_date;
-
-	
-
-	return new_date;
-}
-
-void BitcoinExchange::calculateResult() {
+void BitcoinExchange::calculateResult(std::string& date, const std::string& value) {
 	std::map<std::string, std::string> data = getData();
-	std::multimap<std::string, std::string> input = getInput();
-	std::multimap<std::string, std::string> res;
-	for (auto it = input.begin(); it != input.end(); it++) {
-		std::string date = it->first;
-		std::string value = it->second;
-		if (!isValidDate(date) || !isValidValue(value)) {
-			res.insert(std::make_pair("Error: ", "Bad input"));
-		}
-		else {
-			float rate;
-            auto it = data.find(date);
-            if (it != data.end()) {
-                rate = std::stof(it->second);
-            } else {
-                date = findNextDate(date, data);
-				it = data.find(date);
-				rate = std::stof(it->second);
-            }
-			res.insert(std::make_pair(date, std::to_string(std::stof(value) * rate)));
-		}
-	}
-
+    int res = 0;
+    float nr = isValidValue(value);
+    if (nr == -1)
+        return ;
+    float rate = isValidDate(date, data);
+    if (rate == -1)
+        return ;
+    res = rate * nr;
+    std::cout << date << " => " << value << " = " << res << std::endl;
 }

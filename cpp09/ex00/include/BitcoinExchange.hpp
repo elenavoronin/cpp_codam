@@ -12,9 +12,7 @@
 
 class BitcoinExchange {
     private:
-        std::multimap<std::string, std::string>      	input;
         std::map<std::string, std::string>      		data;
-        std::multimap<std::string, std::string> 		result;
     
     public:
         BitcoinExchange();
@@ -22,20 +20,16 @@ class BitcoinExchange {
         BitcoinExchange& operator=(const BitcoinExchange &copy);
         ~BitcoinExchange();
 
-        void populateData(const std::string& file);
-        void populateInput(const std::string& file);
-        bool validateInput() const;
-		void calculateResult();
-        void printMap(const std::multimap<std::string, std::string>& map) const;
+        void                                        populateData(const std::string& file);
+        void                                        checkInput(const std::string& file);
+		void                                        calculateResult(std::string& date, const std::string& value);
+        void                                        printMap(const std::multimap<std::string, std::string>& map) const;
 
-        const std::map<std::string, std::string>& getData() const;
-        const std::multimap<std::string, std::string>& getInput() const;
-        const std::multimap<std::string, std::string>& getResult() const;
-        void setInput(std::multimap<std::string, std::string>& map);
+        const std::map<std::string, std::string>&   getData() const;
 
+        int                                         isValidValue(const std::string& value);
+        float                                       isValidDate(const std::string& date, const std::map<std::string, std::string>& data);
+    
 
 };
 
-bool isValidValue(const std::string& value);
-bool isValidDate(const std::string& date);
-std::string findNextDate(const std::string &date, const std::map<std::string, std::string> &data);
