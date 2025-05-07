@@ -139,7 +139,7 @@ int BitcoinExchange::isValidValue(const std::string& value) {
 
 void BitcoinExchange::calculateResult(std::string& date, const std::string& value) {
 	std::map<std::string, std::string> data = getData();
-    int res = 0;
+    float res = 0;
     float nr = isValidValue(value);
     if (nr == -1)
         return ;
@@ -147,5 +147,5 @@ void BitcoinExchange::calculateResult(std::string& date, const std::string& valu
     if (rate == -1)
         return ;
     res = rate * nr;
-    std::cout << date << " => " << value << " = " << res << std::endl;
+    std::cout << date << " => " << value << " = "  << std::fixed << std::setprecision(2) << res << std::endl;
 }

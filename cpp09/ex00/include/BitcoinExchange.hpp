@@ -9,6 +9,7 @@
 #include <fstream>
 #include <sstream>
 #include <regex>
+#include <iomanip>
 
 class BitcoinExchange {
     private:
