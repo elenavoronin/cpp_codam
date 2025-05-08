@@ -1,8 +1,8 @@
 
-NAME = PMergeMe
-SRCS = main.cpp ./src/PMergeMe.cpp
+NAME = PmergeMe
+SRCS = main.cpp ./src/PmergeMe.cpp ./src/PmergeMeVector.cpp ./src/PmergeMeDeque.cpp
 OBJS = $(SRCS:.cpp=.o)
-INCLUDE = ./include/PMergeMe.hpp
+INCLUDE = ./include/PmergeMe.hpp
 CC = c++
 FLAGS = -Wall -Wextra -Werror -std=c++11
 INCLUDE_FLAGS = -Iinclude

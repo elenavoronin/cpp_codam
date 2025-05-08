@@ -51,7 +51,7 @@ void BitcoinExchange::checkInput(const std::string& file) {
 			continue;
 		
         if (std::getline(lineStream, key, '|') && lineStream >> value) {
-            if (key == "date" || value == "value")
+            if (key == "date" && value == "value")
                 continue;
 			key.erase(std::find(key.begin(), key.end(), ' '), key.end());
 			value.erase(std::find(value.begin(), value.end(), ' '), value.end());

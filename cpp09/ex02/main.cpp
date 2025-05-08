@@ -1,12 +1,12 @@
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
 
 int main(int argc, char** argv) {
+    long long duration = 0;
     if (argc == 1)
         return 1;
-    
-	long long duration = 0;
-    PMergeMe merge;
+
+    PmergeMe merge;
     try {
 		auto start = std::chrono::high_resolution_clock::now();
         int i = 1;
