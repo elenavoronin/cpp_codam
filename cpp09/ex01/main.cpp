@@ -2,7 +2,7 @@
 
 int main(int argc, char **argv) {
 	if (argc !=2)
-		return -1;
+		return 1;
 	RPN rpn;
 	std::string input = argv[1];
 	std::cout << input << std::endl;
@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
 	}
 	catch (std::exception &e) {
 		std::cout << "Exception: " << e.what() << std::endl;
-		return -1;
+		return 2;
 	}
 	try {
 		rpn.calculus();

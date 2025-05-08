@@ -22,7 +22,7 @@ class RPN {
 
 		class illegal : public std::exception {
 			const char* what() const noexcept override {
-                return "Illegal character";
+                return "Illegal character or format";
             }
 		};
 

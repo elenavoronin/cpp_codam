@@ -28,6 +28,8 @@ void RPN::populateCheck(const std::string &input)
 			std::cout << "input: " << input[i] << std::endl;
 			throw illegal();
 		}
+		if (input[i + 1] && isdigit(input[i]) && input[i + 1] != ' ')
+			throw illegal();
 	}
 	setInput(input);
 }
