@@ -32,4 +32,9 @@ class RPN {
             }
 		};
 
+		class zero : public std::exception {
+			const char* what() const noexcept override {
+                return "Division by zero is impossible";
+            }
+		};
 };
