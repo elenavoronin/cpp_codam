@@ -1,6 +1,5 @@
 #include "PmergeMe.hpp"
 
-
 void PmergeMe::vectorSort() {
 	auto start = std::chrono::high_resolution_clock::now();
     std::vector<int> vector = getVector();
@@ -28,8 +27,8 @@ void PmergeMe::vectorSort() {
     if (last >= 0)
         losers.push_back(last);
         
-    mergeSort(winners, 0, winners.size() - 1);
-    // ::insertBalanced(winners, losers, 0, losers.size() - 1);
+    ::mergeSort(winners, 0, winners.size() - 1);
+    ::insertBalanced(winners, losers, 0, losers.size() - 1);
     setVector(winners);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
@@ -37,59 +36,59 @@ void PmergeMe::vectorSort() {
 }
 
 
-void PmergeMe::merge(std::vector<int>& vector, int left, int right, int mid) {
-    int l = mid - left + 1;
-    int r = right - mid;
+// void PmergeMe::merge(std::vector<int>& vector, int left, int right, int mid) {
+//     int l = mid - left + 1;
+//     int r = right - mid;
     
-    std::vector<int> L(l), R(r);
-    for (int i = 0; i < l; i++) {
-        L[i] = vector[left + i];
-    }
-    for (int j = 0; j < r; j++) {
-        R[j] = vector[mid + 1 + j];
-    }
-    std::cout << "l, r: " << l << ", " << r << std::endl;
-    std::cout << "Left: ";
-    printVector(L);   
-    std::cout << "Right: ";
-    printVector(R);
-    int i = 0;
-    int j = 0;
-    int k = left;
-    while (i < l && j < r) {
-        if (L[i] <= R[j]) {
-            vector[k] = L[i];
-            i++;
-        }
-        else {
-            vector[k] = R[j];
-            j++;
-        }
-        k++;
-    }
-    while (i < l) {
-        vector[k] = L[i];
-        i++;
-        k++;
-    }
-    while (j < r) {
-        vector[k] = R[j];
-        j++;
-        k++;
-    }
-    std::cout << "vector: ";
-    printVector(vector);
-}
+//     std::vector<int> L(l), R(r);
+//     for (int i = 0; i < l; i++) {
+//         L[i] = vector[left + i];
+//     }
+//     for (int j = 0; j < r; j++) {
+//         R[j] = vector[mid + 1 + j];
+//     }
+//     std::cout << "l, r: " << l << ", " << r << std::endl;
+//     std::cout << "Left: ";
+//     printVector(L);   
+//     std::cout << "Right: ";
+//     printVector(R);
+//     int i = 0;
+//     int j = 0;
+//     int k = left;
+//     while (i < l && j < r) {
+//         if (L[i] <= R[j]) {
+//             vector[k] = L[i];
+//             i++;
+//         }
+//         else {
+//             vector[k] = R[j];
+//             j++;
+//         }
+//         k++;
+//     }
+//     while (i < l) {
+//         vector[k] = L[i];
+//         i++;
+//         k++;
+//     }
+//     while (j < r) {
+//         vector[k] = R[j];
+//         j++;
+//         k++;
+//     }
+//     std::cout << "vector: ";
+//     printVector(vector);
+// }
 
-void PmergeMe::mergeSort(std::vector<int>& vector, int left, int right) {
-    if (left >= right)
-        return ;
-    int mid = left + (right - left) / 2;
-    mergeSort(vector, left, mid);
-    mergeSort(vector, mid + 1, right);
-    merge(vector, left, right, mid);
+// void PmergeMe::mergeSort(std::vector<int>& vector, int left, int right) {
+//     if (left >= right)
+//         return ;
+//     int mid = left + (right - left) / 2;
+//     mergeSort(vector, left, mid);
+//     mergeSort(vector, mid + 1, right);
+//     merge(vector, left, right, mid);
 
-}
+// }
 
 
 void PmergeMe::printVector(const std::vector<int>& vector) const {
@@ -98,5 +97,3 @@ void PmergeMe::printVector(const std::vector<int>& vector) const {
     }
     std::cout << std::endl;
 }
-
-

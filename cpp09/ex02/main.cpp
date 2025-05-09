@@ -27,12 +27,12 @@ int main(int argc, char** argv) {
 	}
 
     merge.vectorSort();
-    merge.dequeSort();
+    merge.dequeSort();	
 
     std::cout << "After: ";
     merge.printVector(merge.getVector());
 
-	std::cout << "Time to process a range of 3000 elements with std::vector: " << merge.getTimeVector() + duration << " ms." << std::endl;
-	std::cout << "Time to process a range of 3000 elements with std::deque: " << merge.getTimeDeque() + duration << " ms." << std::endl;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::vector: " << merge.getTimeVector() + duration  << " us." << std::endl;
+	std::cout << "Time to process a range of " << argc - 1 << " elements with std::deque: " << merge.getTimeDeque() + duration << " us." << std::endl;
     return 0;
 }

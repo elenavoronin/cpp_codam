@@ -47,9 +47,6 @@ class PmergeMe {
 		long long                                   getTimeVector() const;;
 		long long                                   getTimeDeque() const;
 
-        void                                        merge(std::vector<int>& vector, int left, int right, int mid);
-        void                                        mergeSort(std::vector<int>& vector, int left, int right);
-
 };
 
 
@@ -75,3 +72,50 @@ void insertBalanced(T& winners, const T& losers, int left, int right) {
     insertBalanced(winners, losers, mid + 1, right); //right subtree
 }
 
+template <typename T>
+void merge(T& container, int left, int right, int mid) {
+    int l = mid - left + 1;
+    int r = right - mid;
+    
+    T L(l), R(r);
+    for (int i = 0; i < l; i++) {
+        L[i] = container[left + i];
+    }
+    for (int j = 0; j < r; j++) {
+        R[j] = container[mid + 1 + j];
+    }
+    int i = 0;
+    int j = 0;
+    int k = left;
+    while (i < l && j < r) {
+        if (L[i] <= R[j]) {
+            container[k] = L[i];
+            i++;
+        }
+        else {
+            container[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+    while (i < l) {
+        container[k] = L[i];
+        i++;
+        k++;
+    }
+    while (j < r) {
+        container[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+template <typename T>
+void mergeSort(T& container, int left, int right) {
+    if (left >= right)
+        return ;
+    int mid = left + (right - left) / 2;
+    mergeSort(container, left, mid);
+    mergeSort(container, mid + 1, right);
+    merge(container, left, right, mid);
+}

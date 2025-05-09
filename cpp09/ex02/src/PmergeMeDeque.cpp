@@ -1,21 +1,17 @@
 #include "PmergeMe.hpp"
 
-
-
-
 void PmergeMe::dequeSort() {
 	auto start = std::chrono::high_resolution_clock::now();
     std::deque<int> winners, losers;
     std::deque<int> deque = getDeque();
-    unsigned long i = 0;
-    int last;
+    int last = -1;
     if (deque.size() % 2 != 0) {
         last = deque[deque.size() -1];
         deque.pop_back();
     }
-    while (i < deque.size()) {
-        int current = deque[i];
-        int next = deque[i + 1];
+    for (auto it = deque.begin(); it != deque.end(); it += 2) {
+        int current = *it;
+        int next = *(it + 1);
         if (current > next) {
             winners.push_back(current);
             losers.push_back(next);
@@ -24,11 +20,10 @@ void PmergeMe::dequeSort() {
             winners.push_back(next);
             losers.push_back(current);
         }
-        i += 2;
     }
-    if (last)
+    if (last >= 0)
         losers.push_back(last);
-    std::sort(winners.begin(), winners.end());
+    ::mergeSort(winners, 0, winners.size() - 1);
     ::insertBalanced(winners, losers, 0, losers.size() - 1);
     setDeque(winners);
 
