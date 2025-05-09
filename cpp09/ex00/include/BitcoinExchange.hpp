@@ -28,9 +28,8 @@ class BitcoinExchange {
 
         const std::map<std::string, std::string>&   getData() const;
 
-        int                                         isValidValue(const std::string& value);
+        float                                       isValidValue(const std::string& value);
         float                                       isValidDate(const std::string& date, const std::map<std::string, std::string>& data);
     
 
 };
-

@@ -10,7 +10,12 @@ int main(int argc, char **argv) {
 	BitcoinExchange be;
 	const std::string &file = argv[1];
 	be.populateData("data.csv");
-	be.checkInput(file);
+	try {
+		be.checkInput(file);
+	}
+	catch (std::exception &e) {
+		std::cerr << "File error: " << e.what() << std::endl;
+	}
 
 
 	return 0;

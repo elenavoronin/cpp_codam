@@ -77,7 +77,13 @@ const std::map<std::string, std::string>& BitcoinExchange::getData() const {
 }
 
 float BitcoinExchange::isValidDate(const std::string& date, const std::map<std::string, std::string>& data) {
-    std::tm     tm{};
+    std::regex dateRegex(R"(^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$)");
+	if (!std::regex_match(date, dateRegex)) {
+        std::cout << "Error: bad input => " << date << std::endl;
+        return -1;
+    }
+	
+	std::tm     tm{};
     std::string rate;
     float       finalRate = -1;
     try {
@@ -115,9 +121,13 @@ float BitcoinExchange::isValidDate(const std::string& date, const std::map<std::
     return finalRate;
 }
 
-int BitcoinExchange::isValidValue(const std::string& value) {
-    float nr = 0;
-    // std::cout << "value: " << value << std::endl;
+float BitcoinExchange::isValidValue(const std::string& value) {
+    std::regex valueRegex(R"(^(?:\d{1,3}(?:\.\d+)?|1000(?:\.0+)?)$)");
+	if (!std::regex_match(value, valueRegex)) {
+        std::cout << "Error: not a valid number => " << value << std::endl;
+        return -1;
+    }
+	float nr = 0;
     try {
         nr = std::stof(value);
     }
@@ -139,7 +149,7 @@ int BitcoinExchange::isValidValue(const std::string& value) {
 
 void BitcoinExchange::calculateResult(std::string& date, const std::string& value) {
 	std::map<std::string, std::string> data = getData();
-    float res = 0;
+    float res = 0.0;
     float nr = isValidValue(value);
     if (nr == -1)
         return ;
