@@ -9,7 +9,6 @@ void PmergeMe::vectorSort() {
     if (vector.size() % 2 != 0) {
         last = vector[vector.size() -1];
         vector.pop_back();
-        losers.push_back(last);
     }
     while (i < vector.size() - 1) {
         int current = vector[i];
@@ -28,72 +27,52 @@ void PmergeMe::vectorSort() {
         losers.push_back(last);
         
     ::mergeSort(winners, 0, winners.size() - 1);
-    ::insertBalanced(winners, losers, 0, losers.size() - 1);
+	// std::cout << "winners: ";
+	// printVector(winners);
+	// std::cout << "losers: " ;
+	// printVector(losers);
+    insertLoserVector(winners, losers);
     setVector(winners);
 	auto end = std::chrono::high_resolution_clock::now();
 	auto duration = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
 	setTimeVector(duration);
 }
 
+void PmergeMe::insertLoserVector(std::vector<int> & winners, std::vector<int> & losers) {
+	std::vector<int> jacobsthalVector;
+	int j0 = 0, j1 = 1;
+	jacobsthalVector.push_back(j0);
+	if (losers.size() > 1)
+		jacobsthalVector.push_back(1);
+	
+	while (true) {
+		int next = j1 + 2 * j0;
+		if (next >= static_cast<int>(losers.size()))
+			break;
+		jacobsthalVector.push_back(next);
+		j0 = j1;
+		j1 = next;
+	}
+	
+	std::sort(jacobsthalVector.begin(), jacobsthalVector.end());
+    jacobsthalVector.erase(std::unique(jacobsthalVector.begin(), jacobsthalVector.end()), jacobsthalVector.end());
 
-// void PmergeMe::merge(std::vector<int>& vector, int left, int right, int mid) {
-//     int l = mid - left + 1;
-//     int r = right - mid;
-    
-//     std::vector<int> L(l), R(r);
-//     for (int i = 0; i < l; i++) {
-//         L[i] = vector[left + i];
-//     }
-//     for (int j = 0; j < r; j++) {
-//         R[j] = vector[mid + 1 + j];
-//     }
-//     std::cout << "l, r: " << l << ", " << r << std::endl;
-//     std::cout << "Left: ";
-//     printVector(L);   
-//     std::cout << "Right: ";
-//     printVector(R);
-//     int i = 0;
-//     int j = 0;
-//     int k = left;
-//     while (i < l && j < r) {
-//         if (L[i] <= R[j]) {
-//             vector[k] = L[i];
-//             i++;
-//         }
-//         else {
-//             vector[k] = R[j];
-//             j++;
-//         }
-//         k++;
-//     }
-//     while (i < l) {
-//         vector[k] = L[i];
-//         i++;
-//         k++;
-//     }
-//     while (j < r) {
-//         vector[k] = R[j];
-//         j++;
-//         k++;
-//     }
-//     std::cout << "vector: ";
-//     printVector(vector);
-// }
-
-// void PmergeMe::mergeSort(std::vector<int>& vector, int left, int right) {
-//     if (left >= right)
-//         return ;
-//     int mid = left + (right - left) / 2;
-//     mergeSort(vector, left, mid);
-//     mergeSort(vector, mid + 1, right);
-//     merge(vector, left, right, mid);
-
-// }
-
+	std::vector<bool> inserted(losers.size(), false);
+	for (int index : jacobsthalVector) {
+		if (index >= 0 && index < static_cast<int>(losers.size())) {
+			binaryInsert(winners, losers[index], 0, winners.size() - 1);
+			inserted[index] = true;
+		}
+	}
+	for (size_t i = 0; i < losers.size(); i++) {
+		if (!inserted[i])
+			binaryInsert(winners, losers[i], 0, winners.size() - 1);
+	}
+}
 
 void PmergeMe::printVector(const std::vector<int>& vector) const {
-    for (auto it = vector.begin(); it != vector.end(); it++) {
-        std::cout << *it << " ";
+    for (const int& num : vector) {
+        std::cout << num << " ";
     }
     std::cout << std::endl;
 }

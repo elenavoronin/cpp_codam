@@ -24,7 +24,7 @@ void PmergeMe::dequeSort() {
     if (last >= 0)
         losers.push_back(last);
     ::mergeSort(winners, 0, winners.size() - 1);
-    ::insertBalanced(winners, losers, 0, losers.size() - 1);
+    insertLoserDeque(winners, losers);
     setDeque(winners);
 
 	auto end = std::chrono::high_resolution_clock::now();
@@ -38,4 +38,37 @@ void PmergeMe::printDeque(const std::deque<int>& deque) const {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
+}
+
+void PmergeMe::insertLoserDeque(std::deque<int>& winners, std::deque<int>& losers) {
+	std::deque<int> jacobsthalDeque;
+	int j0 = 0, j1 = 1;
+	jacobsthalDeque.push_back(j0);
+	if (losers.size() > 1)
+		jacobsthalDeque.push_back(1);
+
+	while (true) {
+		int next = j1 + 2 * j0;
+		if (next >= static_cast<int>(losers.size()))
+			break;
+		jacobsthalDeque.push_back(next);
+		j0 = j1;
+		j1 = next;
+	}
+
+	std::sort(jacobsthalDeque.begin(), jacobsthalDeque.end());
+    jacobsthalDeque.erase(std::unique(jacobsthalDeque.begin(), jacobsthalDeque.end()), jacobsthalDeque.end());
+	
+	std::vector<bool> inserted(losers.size(), false);
+	for (int index : jacobsthalDeque) {
+		if (index >= 0 && index < static_cast<int>(losers.size())) {
+			binaryInsert(winners, losers[index], 0, winners.size() - 1);
+			inserted[index] = true;
+		}
+	}
+
+	for (size_t i = 0; i < losers.size(); i++) {
+		if (!inserted[i])
+			binaryInsert(winners, losers[i], 0, winners.size() - 1);
+	}
 }
