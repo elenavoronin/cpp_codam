@@ -62,13 +62,13 @@ void PmergeMe::insertLoserDeque(std::deque<int>& winners, std::deque<int>& loser
 	std::vector<bool> inserted(losers.size(), false);
 	for (int index : jacobsthalDeque) {
 		if (index >= 0 && index < static_cast<int>(losers.size())) {
-			binaryInsert(winners, losers[index], 0, winners.size() - 1);
+			binaryInsert(winners, losers[index], 0, winners.size());
 			inserted[index] = true;
 		}
 	}
 
 	for (size_t i = 0; i < losers.size(); i++) {
 		if (!inserted[i])
-			binaryInsert(winners, losers[i], 0, winners.size() - 1);
+			binaryInsert(winners, losers[i], 0, winners.size());
 	}
 }
