@@ -52,7 +52,8 @@ class PmergeMe {
 
 template <typename T>
 void binaryInsert(T& container, int value, int left, int right) {
-	if (left >= right) {
+	std::cout << "value: " << value << std::endl;
+    if (left >= right) {
 		container.insert(container.begin() + left, value);
 		return;
 	}

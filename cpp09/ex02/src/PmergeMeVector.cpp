@@ -50,14 +50,28 @@ void PmergeMe::insertLoserVector(std::vector<int> & winners, std::vector<int> & 
 		j1 = next;
 	}
 	
-	// std::sort(jacobsthalVector.begin(), jacobsthalVector.end());
-    // jacobsthalVector.erase(std::unique(jacobsthalVector.begin(), jacobsthalVector.end()), jacobsthalVector.end());
+	std::sort(jacobsthalVector.begin(), jacobsthalVector.end());
+    jacobsthalVector.erase(std::unique(jacobsthalVector.begin(), jacobsthalVector.end()), jacobsthalVector.end());
 
 	std::vector<bool> inserted(losers.size(), false);
-	for (int index : jacobsthalVector) {
+	for (size_t i = 0; i < jacobsthalVector.size(); ++i) {
+        int index = jacobsthalVector[i];
 		if (index >= 0 && index < static_cast<int>(losers.size())) {
-			binaryInsert(winners, losers[index], 0, winners.size());
-			inserted[index] = true;
+            if (index == 0 || index == 1) {
+                binaryInsert(winners, losers[index], 0, winners.size());
+                inserted[index] = true;
+            }
+            else {
+                binaryInsert(winners, losers[index], 0, winners.size());
+                inserted[index] = true;
+                int limit = index;
+                index = jacobsthalVector[i - 1] + 1;
+                while (index < limit) {
+                    binaryInsert(winners, losers[index], 0, winners.size());
+                    inserted[index] = true;
+                    index++;
+                }
+            }
 		}
 	}
 	for (size_t i = 0; i < losers.size(); i++) {
