@@ -27,10 +27,10 @@ int main(int argc, char** argv) {
 	}
 
     merge.vectorSort();
-    // merge.dequeSort();	
+    merge.dequeSort();	
 
     std::cout << "After: ";
-    std::cout << "Vector: ";
+    // std::cout << "Vector: ";
     merge.printVector(merge.getVector());
     // std::cout << "Deque: ";
     // merge.printDeque(merge.getDeque());
